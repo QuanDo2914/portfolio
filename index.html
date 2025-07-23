@@ -1,13 +1,122 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name – Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container">
+      <a href="#home"    class="logo">Your<span>Name</span></a>
+      <nav>
+        <a href="#home"     class="nav-link">Home</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#about"    class="nav-link">About</a>
+        <a href="#contact"  class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="section section--hero">
+    <div class="overlay"></div>
+    <img src="assets/sticker.png" alt="Sticker" class="sticker">
+    <div class="hero-content container">
+      <h1>Hello, I’m <span class="highlight">Your Name</span></h1>
+      <p>AI Engineer &amp; Software Developer</p>
+      <a href="#projects" class="btn">My Work ↓</a>
+    </div>
+  </section>
+
+  <!-- WAVE -->
+  <figure class="wave wave--bottom">
+    <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
+      <path class="wave__shape"
+            d="M0,0 L1200,0 L1200,100 C900,0 300,200 0,100 Z"/>
+    </svg>
+  </figure>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section section--projects">
+    <div class="container">
+      <h2>Featured Projects</h2>
+      <div class="card-grid">
+        <div class="card">
+          <img src="assets/project-stock.png" alt="Stock Predictor">
+          <div class="card-body">
+            <h3>Stock Predictor</h3>
+            <p>Predict BUY/SELL signals with logistic regression wrapped in a Flask API.</p>
+            <a href="predictor.html" class="btn-outline">Visit Stock Predictor →</a>
+          </div>
+        </div>
+        <!-- repeat .card blocks for other projects -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FLIPPED WAVE -->
+  <figure class="wave wave--flip">
+    <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
+      <path class="wave__shape"
+            d="M0,0 C300,100 900,-100 1200,0 L1200,100 L0,100 Z"/>
+    </svg>
+  </figure>
+
+  <!-- ABOUT -->
+  <section id="about" class="section section--about">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>I’m a CS graduate passionate about AI &amp; ML. I build predictive models, full‑stack apps, and I’m pursuing an MSCS to deepen my expertise.</p>
+      <div class="skills">
+        <span>Python</span><span>React</span><span>Flask</span>
+        <span>TensorFlow</span><span>Docker</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAVE -->
+  <figure class="wave wave--bottom">
+    <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
+      <path class="wave__shape"
+            d="M0,0 L1200,0 L1200,100 C800,50 400,150 0,100 Z"/>
+    </svg>
+  </figure>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section section--contact">
+    <div class="container">
+      <h2>Get In Touch</h2>
+      <p>Based in Amherst, MA. Drop me a line:</p>
+      <div class="contact-buttons">
+        <a href="mailto:qmdo@umass.edu" class="btn">Email</a>
+        <a href="https://linkedin.com/in/quan-m-do/" class="btn-outline">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2025 Your Name. All rights reserved.</p>
+  </footer>
+
+  <!-- SCROLL‑SPY -->
+  <script>
+    const sections = document.querySelectorAll('.section');
+    const links    = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+      const mid = window.scrollY + window.innerHeight/2;
+      sections.forEach(sec => {
+        if (mid > sec.offsetTop && mid < sec.offsetTop + sec.offsetHeight) {
+          links.forEach(a =>
+            a.classList.toggle('active', a.getAttribute('href') === '#' + sec.id)
+          );
+        }
+      });
+    });
+  </script>
+</body>
 </html>

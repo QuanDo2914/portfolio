@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stock Predictor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">Your<span>Name</span></a>
+      <nav>
+        <a href="index.html#home"     class="nav-link">Home</a>
+        <a href="index.html#projects" class="nav-link">Projects</a>
+        <a href="index.html#about"    class="nav-link">About</a>
+        <a href="index.html#contact"  class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PREDICTOR SECTION -->
+  <section id="predictor" class="section section--predictor" style="padding-top: 8rem;">
+    <div class="container">
+      <h2>Stock Predictor</h2>
+      <form id="predict-form">
+        <input type="text"
+               id="ticker"
+               placeholder="Enter ticker (e.g. AAPL)"
+               required>
+        <button type="submit" class="btn">Predict</button>
+      </form>
+      <div id="result"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p><a href="index.html" class="btn-outline">← Back to Portfolio</a></p>
+    <p>© 2025 Your Name. All rights reserved.</p>
+  </footer>
+
+  <!-- FETCH SCRIPT -->
+  <script>
+    document.getElementById('predict-form')
+      .addEventListener('submit', async e => {
+        e.preventDefault();
+        const t = document.getElementById('ticker').value.toUpperCase();
+        const resDiv = document.getElementById('result');
+        resDiv.textContent = 'Loading…';
+        try {
+          const resp = await fetch(`http://127.0.0.1:5000/predict?ticker=${t}`);
+          const data = await resp.json();
+          if (data.error) throw new Error(data.error);
+          resDiv.innerHTML = `<strong>${data.ticker}</strong> → ${data.predicted_action}`;
+        } catch (err) {
+          resDiv.textContent = 'Error: ' + err.message;
+        }
+      });
+  </script>
+</body>
+</html>
