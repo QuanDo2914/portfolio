@@ -20,10 +20,10 @@
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
       <nav class="nav-collapse">
-        <a href="#home"    class="nav-link">Home</a>
+        <a href="#home"     class="nav-link">Home</a>
         <a href="#projects" class="nav-link">Projects</a>
-        <a href="#about"   class="nav-link">About</a>
-        <a href="#contact" class="nav-link">Contact</a>
+        <a href="#about"    class="nav-link">About</a>
+        <a href="#contact"  class="nav-link">Contact</a>
         <a href="assets/QuanDo_resume.pdf" class="nav-link resume" target="_blank" rel="noopener">Resume</a>
       </nav>
     </div>
@@ -38,9 +38,7 @@
       <p>AI Engineer &amp; Software Developer</p>
       <div class="hero-cta">
         <a href="#projects" class="btn">My Work ↓</a>
-        <!--
-        <a href="/predictor.html" class="btn-outline">Stock Predictor</a>
-        -->
+        <!-- <a href="/predictor.html" class="btn-outline">Stock Predictor</a> -->
       </div>
     </div>
   </section>
@@ -48,59 +46,54 @@
   <!-- WAVE -->
   <figure class="wave wave--bottom">
     <svg viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true">
-      <path class="wave__shape"
-            d="M0,0 L1200,0 L1200,100 C900,0 300,200 0,100 Z"/>
+      <path class="wave__shape" d="M0,0 L1200,0 L1200,100 C900,0 300,200 0,100 Z"/>
     </svg>
   </figure>
 
-<!-- PROJECTS -->
-<section id="projects" class="section section--projects">
-  <div class="container">
-    <h2>Featured Projects</h2>
-    <div class="card-grid">
+  <!-- PROJECTS -->
+  <section id="projects" class="section section--projects">
+    <div class="container">
+      <h2>Featured Projects</h2>
+      <div class="card-grid">
 
-      <!-- Project: Typing Speed Test -->
-      <div class="card">
-        <img src="assets/project-typingtest.png" alt="Typing Speed Test screenshot">
-        <div class="card-body">
-          <h3>Typing Speed Test</h3>
-          <p>A clean, minimal typing app that measures your WPM in real time while you type short prompts.</p>
-          <div class="links">
-            <a href="https://quantypingtest.netlify.app" class="btn small" target="_blank" rel="noopener">View App →</a>
-            <!-- Update this to the repo for the typing test (if public) -->
-            <a href="https://github.com/QuanDo2914/typing-test" class="btn-outline small" target="_blank" rel="noopener">Source</a>
+        <!-- Project: Typing Speed Test -->
+        <div class="card">
+          <img src="assets/project-typingtest.png" alt="Typing Speed Test screenshot">
+          <div class="card-body">
+            <h3>Typing Speed Test</h3>
+            <p>A clean, minimal typing app that measures your WPM in real time while you type short prompts.</p>
+            <div class="links">
+              <a href="https://quantypingtest.netlify.app" class="btn small" target="_blank" rel="noopener">View App →</a>
+              <a href="https://github.com/QuanDo2914/typing-test" class="btn-outline small" target="_blank" rel="noopener">Source</a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Stock Predictor (hidden for now) -->
-      <!--
-      <div class="card">
-        <img src="assets/project-stock.png" alt="Stock Predictor screenshot">
-        <div class="card-body">
-          <h3>Stock Predictor</h3>
-          <p>Predict BUY / SELL signals using a logistic regression model wrapped in a Flask API. Includes live status and confidence.</p>
-          <div class="links">
-            <a href="/predictor.html" class="btn small">View App →</a>
-            <a href="https://github.com/QuanDo2914/portfolio" class="btn-outline small" target="_blank" rel="noopener">Source</a>
+        <!-- Stock Predictor (hidden for now) -->
+        <!--
+        <div class="card">
+          <img src="assets/project-stock.png" alt="Stock Predictor screenshot">
+          <div class="card-body">
+            <h3>Stock Predictor</h3>
+            <p>Predict BUY / SELL signals using a logistic regression model wrapped in a Flask API. Includes live status and confidence.</p>
+            <div class="links">
+              <a href="/predictor.html" class="btn small">View App →</a>
+              <a href="https://github.com/QuanDo2914/portfolio" class="btn-outline small" target="_blank" rel="noopener">Source</a>
+            </div>
           </div>
         </div>
+        -->
+
+        <!-- Add more project cards here -->
+
       </div>
-      -->
-
-      <!-- Add more project cards here -->
-
     </div>
-  </div>
-</section>
-
   </section>
 
   <!-- FLIPPED WAVE -->
   <figure class="wave wave--flip">
     <svg viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true">
-      <path class="wave__shape"
-            d="M0,0 C300,100 900,-100 1200,0 L1200,100 L0,100 Z"/>
+      <path class="wave__shape" d="M0,0 C300,100 900,-100 1200,0 L1200,100 L0,100 Z"/>
     </svg>
   </figure>
 
@@ -119,8 +112,7 @@
   <!-- WAVE -->
   <figure class="wave wave--bottom">
     <svg viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true">
-      <path class="wave__shape"
-            d="M0,0 L1200,0 L1200,100 C800,50 400,150 0,100 Z"/>
+      <path class="wave__shape" d="M0,0 L1200,0 L1200,100 C800,50 400,150 0,100 Z"/>
     </svg>
   </figure>
 
@@ -148,40 +140,13 @@
         </div>
         <p class="copyright">© 2025 Quan Do. All rights reserved.</p>
       </div>
-  
-      <!-- ADD STICKER HERE -->
+
+      <!-- Footer sticker -->
       <img src="assets/take-care.png" alt="Take care sticker" class="sticker-footer" aria-hidden="true">
     </div>
   </footer>
-  
-  <!-- SCROLL-SPY & NAV -->
-  <script>
-    // hamburger toggle
-    const hamburger = document.querySelector('.hamburger');
-    const nav = document.querySelector('.nav-collapse');
-    hamburger.addEventListener('click', () => {
-      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
-      hamburger.setAttribute('aria-expanded', String(!expanded));
-      nav.classList.toggle('open');
-    });
 
-    // scroll-spy highlight
-    const sections = document.querySelectorAll('.section');
-    const links = document.querySelectorAll('.nav-link');
-    window.addEventListener('scroll', () => {
-      const mid = window.scrollY + window.innerHeight / 2;
-      sections.forEach(sec => {
-        if (mid >= sec.offsetTop && mid < sec.offsetTop + sec.offsetHeight) {
-          links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + sec.id));
-        }
-      });
-    });
-
-    // smooth closing mobile menu on click
-    links.forEach(a => a.addEventListener('click', () => {
-      nav.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-    }));
-  </script>
+  <!-- JS -->
+  <script src="script.js"></script>
 </body>
 </html>
