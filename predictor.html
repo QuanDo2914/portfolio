@@ -1,64 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Stock Predictor</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Stock Predictor – Quan Do</title>
+  <meta name="description" content="Stock predictor: logistic regression-based buy/sell signal for major tickers.">
+  <link rel="icon" href="assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <header class="navbar">
     <div class="container">
-      <a href="index.html" class="logo">Your<span>Name</span></a>
-      <nav>
-        <a href="index.html#home"     class="nav-link">Home</a>
-        <a href="index.html#projects" class="nav-link">Projects</a>
-        <a href="index.html#about"    class="nav-link">About</a>
-        <a href="index.html#contact"  class="nav-link">Contact</a>
+      <a href="/" class="logo">Quan<span> Do</span></a>
+      <nav class="nav-collapse">
+        <a href="/" class="nav-link">Portfolio</a>
+        <a href="/predictor.html" class="nav-link active">Predictor</a>
       </nav>
     </div>
   </header>
 
-  <!-- PREDICTOR SECTION -->
-  <section id="predictor" class="section section--predictor" style="padding-top: 8rem;">
-    <div class="container">
-      <h2>Stock Predictor</h2>
-      <form id="predict-form">
-        <input type="text"
-               id="ticker"
-               placeholder="Enter ticker (e.g. AAPL)"
-               required>
-        <button type="submit" class="btn">Predict</button>
-      </form>
-      <div id="result"></div>
-    </div>
-  </section>
+  <main class="section section--predictor">
+    <div class="container" style="padding-top: 160px;">
+      <h1>Stock Predictor</h1>
+      <p>A logistic regression model trained on the past 5 days’ returns to predict if a stock will go up (“BUY”) or down (“SELL”) tomorrow. This is **not financial advice** — just signals from the model.</p>
 
-  <!-- FOOTER -->
+      <div id="predictor" aria-label="Predictor form">
+        <div class="predictor-row">
+          <input id="ticker" type="text" aria-label="Ticker symbol" placeholder="e.g. AAPL" value="AAPL" maxlength="6">
+          <button id="btn" class="btn">Predict</button>
+        </div>
+        <div class="status">
+          <span id="api-status" class="small-info">API status: <strong id="status-text">Unknown</strong></span>
+        </div>
+        <div id="result" role="status" aria-live="polite"></div>
+      </div>
+
+      <div class="note">
+        <p>Supported symbols: AAPL, MSFT, AMZN, GOOGL, NVDA, ^GSPC, VOOG (expandable later).</p>
+      </div>
+
+      <div class="back">
+        <a href="/" class="btn-outline">← Back to Portfolio</a>
+      </div>
+    </div>
+  </main>
+
   <footer class="footer">
-    <p><a href="index.html" class="btn-outline">← Back to Portfolio</a></p>
-    <p>© 2025 Your Name. All rights reserved.</p>
+    <div class="container">
+      <p>© 2025 Quan Do. All rights reserved.</p>
+    </div>
   </footer>
 
-  <!-- FETCH SCRIPT -->
   <script>
-    document.getElementById('predict-form')
-      .addEventListener('submit', async e => {
-        e.preventDefault();
-        const t = document.getElementById('ticker').value.toUpperCase();
-        const resDiv = document.getElementById('result');
-        resDiv.textContent = 'Loading…';
-        try {
-          const resp = await fetch(`http://127.0.0.1:5000/predict?ticker=${t}`);
-          const data = await resp.json();
-          if (data.error) throw new Error(data.error);
-          resDiv.innerHTML = `<strong>${data.ticker}</strong> → ${data.predicted_action}`;
-        } catch (err) {
-          resDiv.textContent = 'Error: ' + err.message;
+    const statusText = document.getElementById('status-text');
+    const apiStatusEl = document.getElementById('api-status');
+    const resultEl = document.getElementById('result');
+    const btn = document.getElementById('btn');
+    const tickerInput = document.getElementById('ticker');
+
+    // Replace this with your actual backend URL if hosted separately.
+    const BASE_API = window.location.origin.includes('netlify') 
+      ? 'https://your-flask-api-domain.example.com' 
+      : 'http://127.0.0.1:5000';
+
+    async function checkAPI() {
+      try {
+        const res = await fetch(`${BASE_API}/predict?ticker=AAPL`);
+        if (!res.ok) throw new Error('bad status');
+        statusText.textContent = 'Online';
+        statusText.style.color = '#6ce58b';
+      } catch (e) {
+        statusText.textContent = 'Offline / unreachable';
+        statusText.style.color = '#ff6b6b';
+      }
+    }
+
+    async function predict() {
+      const ticker = tickerInput.value.trim().toUpperCase();
+      if (!ticker) {
+        resultEl.textContent = 'Enter a ticker.';
+        return;
+      }
+      resultEl.textContent = 'Loading...';
+      try {
+        const res = await fetch(`${BASE_API}/predict?ticker=${encodeURIComponent(ticker)}`);
+        if (!res.ok) {
+          const err = await res.json().catch(()=>({error: 'unknown'}));
+          throw new Error(err.error || res.statusText);
         }
-      });
+        const data = await res.json();
+        resultEl.innerHTML = `<strong>Signal:</strong> ${data.predicted_action} <span class="badge">${ticker}</span>`;
+      } catch (err) {
+        resultEl.textContent = `Error: ${err.message || 'Failed to fetch'}`;
+      }
+    }
+
+    btn.addEventListener('click', predict);
+    tickerInput.addEventListener('keypress', e => {
+      if (e.key === 'Enter') predict();
+    });
+
+    // initial check
+    checkAPI();
   </script>
 </body>
 </html>
