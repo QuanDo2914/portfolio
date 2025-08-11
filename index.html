@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Name – Portfolio</title>
+  <title>Quan Do – Portfolio</title>
+  <meta name="description" content="Quan Do — AI Engineer & Software Developer. Showcase of projects including a stock predictor.">
+  <link rel="icon" href="assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,12 +15,16 @@
   <!-- NAVBAR -->
   <header class="navbar">
     <div class="container">
-      <a href="#home"    class="logo">Your<span>Name</span></a>
-      <nav>
-        <a href="#home"     class="nav-link">Home</a>
+      <a href="#home" class="logo">Quan<span> Do</span></a>
+      <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <nav class="nav-collapse">
+        <a href="#home"    class="nav-link">Home</a>
         <a href="#projects" class="nav-link">Projects</a>
-        <a href="#about"    class="nav-link">About</a>
-        <a href="#contact"  class="nav-link">Contact</a>
+        <a href="#about"   class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <a href="assets/QuanDo_resume.pdf" class="nav-link resume" target="_blank" rel="noopener">Resume</a>
       </nav>
     </div>
   </header>
@@ -24,43 +32,73 @@
   <!-- HERO -->
   <section id="home" class="section section--hero">
     <div class="overlay"></div>
-    <img src="assets/sticker.png" alt="Sticker" class="sticker">
+    <img src="assets/hi-sticker.png" alt="Sticker" class="sticker" aria-hidden="true">
     <div class="hero-content container">
-      <h1>Hello, I’m <span class="highlight">Your Name</span></h1>
+      <h1>Hello, I’m <span class="highlight">Quan Do</span></h1>
       <p>AI Engineer &amp; Software Developer</p>
-      <a href="#projects" class="btn">My Work ↓</a>
+      <div class="hero-cta">
+        <a href="#projects" class="btn">My Work ↓</a>
+        <!--
+        <a href="/predictor.html" class="btn-outline">Stock Predictor</a>
+        -->
+      </div>
     </div>
   </section>
 
   <!-- WAVE -->
   <figure class="wave wave--bottom">
-    <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
+    <svg viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true">
       <path class="wave__shape"
             d="M0,0 L1200,0 L1200,100 C900,0 300,200 0,100 Z"/>
     </svg>
   </figure>
 
-  <!-- PROJECTS -->
-  <section id="projects" class="section section--projects">
-    <div class="container">
-      <h2>Featured Projects</h2>
-      <div class="card-grid">
-        <div class="card">
-          <img src="assets/project-stock.png" alt="Stock Predictor">
-          <div class="card-body">
-            <h3>Stock Predictor</h3>
-            <p>Predict BUY/SELL signals with logistic regression wrapped in a Flask API.</p>
-            <a href="predictor.html" class="btn-outline">Visit Stock Predictor →</a>
+<!-- PROJECTS -->
+<section id="projects" class="section section--projects">
+  <div class="container">
+    <h2>Featured Projects</h2>
+    <div class="card-grid">
+
+      <!-- Project: Typing Speed Test -->
+      <div class="card">
+        <img src="assets/project-typingtest.png" alt="Typing Speed Test screenshot">
+        <div class="card-body">
+          <h3>Typing Speed Test</h3>
+          <p>A clean, minimal typing app that measures your WPM in real time while you type short prompts.</p>
+          <div class="links">
+            <a href="https://quantypingtest.netlify.app" class="btn small" target="_blank" rel="noopener">View App →</a>
+            <!-- Update this to the repo for the typing test (if public) -->
+            <a href="https://github.com/QuanDo2914/typing-test" class="btn-outline small" target="_blank" rel="noopener">Source</a>
           </div>
         </div>
-        <!-- repeat .card blocks for other projects -->
       </div>
+
+      <!-- Stock Predictor (hidden for now) -->
+      <!--
+      <div class="card">
+        <img src="assets/project-stock.png" alt="Stock Predictor screenshot">
+        <div class="card-body">
+          <h3>Stock Predictor</h3>
+          <p>Predict BUY / SELL signals using a logistic regression model wrapped in a Flask API. Includes live status and confidence.</p>
+          <div class="links">
+            <a href="/predictor.html" class="btn small">View App →</a>
+            <a href="https://github.com/QuanDo2914/portfolio" class="btn-outline small" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
+      -->
+
+      <!-- Add more project cards here -->
+
     </div>
+  </div>
+</section>
+
   </section>
 
   <!-- FLIPPED WAVE -->
   <figure class="wave wave--flip">
-    <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
+    <svg viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true">
       <path class="wave__shape"
             d="M0,0 C300,100 900,-100 1200,0 L1200,100 L0,100 Z"/>
     </svg>
@@ -70,17 +108,17 @@
   <section id="about" class="section section--about">
     <div class="container">
       <h2>About Me</h2>
-      <p>I’m a CS graduate passionate about AI &amp; ML. I build predictive models, full‑stack apps, and I’m pursuing an MSCS to deepen my expertise.</p>
+      <p>I’m a computer science graduate passionate about AI and machine learning. I build predictive models, full-stack applications, and I’m applying / pursuing an MSCS to deepen my expertise.</p>
       <div class="skills">
         <span>Python</span><span>React</span><span>Flask</span>
-        <span>TensorFlow</span><span>Docker</span>
+        <span>TensorFlow</span><span>Docker</span><span>Logistic Regression</span>
       </div>
     </div>
   </section>
 
   <!-- WAVE -->
   <figure class="wave wave--bottom">
-    <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
+    <svg viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true">
       <path class="wave__shape"
             d="M0,0 L1200,0 L1200,100 C800,50 400,150 0,100 Z"/>
     </svg>
@@ -90,33 +128,60 @@
   <section id="contact" class="section section--contact">
     <div class="container">
       <h2>Get In Touch</h2>
-      <p>Based in Amherst, MA. Drop me a line:</p>
+      <p>Based in Amherst, MA — feel free to drop me a line or connect on LinkedIn.</p>
       <div class="contact-buttons">
         <a href="mailto:qmdo@umass.edu" class="btn">Email</a>
-        <a href="https://linkedin.com/in/quan-m-do/" class="btn-outline">LinkedIn</a>
+        <a href="https://linkedin.com/in/quan-m-do/" class="btn-outline" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/QuanDo2914" class="btn-outline" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <p>© 2025 Your Name. All rights reserved.</p>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="assets/QuanDo_resume.pdf" target="_blank" rel="noopener">Resume</a>
+          <a href="https://github.com/QuanDo2914" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/quan-m-do/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+        <p class="copyright">© 2025 Quan Do. All rights reserved.</p>
+      </div>
+  
+      <!-- ADD STICKER HERE -->
+      <img src="assets/take-care.png" alt="Take care sticker" class="sticker-footer" aria-hidden="true">
+    </div>
   </footer>
-
-  <!-- SCROLL‑SPY -->
+  
+  <!-- SCROLL-SPY & NAV -->
   <script>
+    // hamburger toggle
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('.nav-collapse');
+    hamburger.addEventListener('click', () => {
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('open');
+    });
+
+    // scroll-spy highlight
     const sections = document.querySelectorAll('.section');
-    const links    = document.querySelectorAll('.nav-link');
+    const links = document.querySelectorAll('.nav-link');
     window.addEventListener('scroll', () => {
-      const mid = window.scrollY + window.innerHeight/2;
+      const mid = window.scrollY + window.innerHeight / 2;
       sections.forEach(sec => {
-        if (mid > sec.offsetTop && mid < sec.offsetTop + sec.offsetHeight) {
-          links.forEach(a =>
-            a.classList.toggle('active', a.getAttribute('href') === '#' + sec.id)
-          );
+        if (mid >= sec.offsetTop && mid < sec.offsetTop + sec.offsetHeight) {
+          links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + sec.id));
         }
       });
     });
+
+    // smooth closing mobile menu on click
+    links.forEach(a => a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }));
   </script>
 </body>
 </html>
