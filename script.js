@@ -86,3 +86,53 @@ window.addEventListener('scroll', () => {
 hamburger?.addEventListener('click', () => {
   navbar?.classList.remove('navbar--hidden');
 });
+
+// ---- Strava "Recent Run" ----
+document.addEventListener('DOMContentLoaded', async () => {
+    const card = document.getElementById('strava-card');
+    if (!card) return;
+  
+    try {
+      const res = await fetch('/.netlify/functions/strava');
+      if (!res.ok) throw new Error('Failed to reach function');
+      const data = await res.json();
+      const a = data.latest;
+  
+      if (!a) {
+        card.innerHTML = '<p class="muted">No recent public runs found.</p>';
+        return;
+      }
+  
+      // Helpers
+      const mToMi = m => (m / 1609.344);
+      const secToMinSec = s => {
+        const m = Math.floor(s / 60);
+        const sec = Math.round(s % 60);
+        return `${m}:${sec.toString().padStart(2, '0')}`;
+      };
+  
+      const distanceMi = mToMi(a.distance || 0);
+      const timeSec = a.moving_time || 0;
+      const paceSecPerMi = distanceMi > 0 ? timeSec / distanceMi : 0;
+  
+      const when = new Date(a.start_date_local || a.start_date).toLocaleString([], {
+        month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
+      });
+  
+      card.innerHTML = `
+        <div class="strava-row">
+          <div class="strava-title">${a.name || 'Recent activity'}</div>
+          <div class="strava-badges">
+            <span class="badge--pill">${distanceMi.toFixed(2)} mi</span>
+            <span class="badge--pill">${secToMinSec(timeSec)} moving</span>
+            <span class="badge--pill">${secToMinSec(paceSecPerMi)}/mi</span>
+          </div>
+        </div>
+        <p class="muted">${when} · ${a.type || 'Run'}</p>
+      `;
+    } catch (err) {
+      console.error(err);
+      card.innerHTML = '<p class="muted">Couldn’t load Strava right now.</p>';
+    }
+  });
+  
