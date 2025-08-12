@@ -156,39 +156,151 @@ body {
 }
 
 
-/* ===== HERO ===== */
+/* ===== HERO SECTION ===== */
 .section--hero {
-  height:100vh;
-  display:flex; align-items:center; justify-content:center;
+  position: relative; /* needed for absolutely positioned stickers */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background:
-    linear-gradient(135deg,var(--clr-navy-dk),var(--clr-navy)),
+    linear-gradient(135deg, var(--clr-navy-dk), var(--clr-navy)),
     url('assets/hero-bg.jpg') center/cover no-repeat;
   color: var(--clr-white);
 }
+
+/* Overlay */
 .section--hero .overlay {
-  position:absolute; inset:0; background:rgba(0,0,0,0.4);
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
 }
+
+/* ===== HERO SECTION ===== */
+.section--hero {
+  position: relative; /* needed for absolutely positioned stickers */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, var(--clr-navy-dk), var(--clr-navy)),
+    url('assets/hero-bg.jpg') center/cover no-repeat;
+  color: var(--clr-white);
+}
+
+/* Overlay */
+.section--hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Top-right sticker ("hi") */
 .sticker {
   position: absolute;
-  top: 25%;
-  right: 20%;
+  top: 20%;
+  right: 15%;
   width: 200px;
   height: auto;
   z-index: 5;
+  will-change: transform;
+  transition: transform 0.2s ease;
 }
-@keyframes popIn { to { transform:rotate(0deg) scale(1); } }
+
+/* Wave from the bottom pivot on hover */
+.sticker:hover {
+  transform-origin: 50% 100%; /* pivot at bottom center */
+  animation: wave-hand 1s ease-in-out infinite;
+}
+
+/* Bottom-left sticker ("welcome") */
+.sticker-welcome {
+  position: absolute;
+  bottom: 20%;
+  left: 15%;
+  width: 200px;
+  height: auto;
+  z-index: 5;
+  animation: welcomePop 0.8s ease-out both; /* pop in only */
+  will-change: transform;
+}
+
+/* Bob on hover only */
+.sticker-welcome:hover {
+  animation: bob 1.2s ease-in-out infinite; /* faster bob */
+}
+
+/* ===== Animations ===== */
+@keyframes wave-hand {
+  0%   { transform: rotate(0deg); }
+  20%  { transform: rotate(8deg); }
+  40%  { transform: rotate(-6deg); }
+  60%  { transform: rotate(6deg); }
+  80%  { transform: rotate(-3deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes welcomePop {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .sticker:hover,
+  .sticker-welcome:hover {
+    animation: none !important;
+  }
+}
+
+/* Hero text content */
 .hero-content {
-  position:relative; text-align:center; z-index:2;
+  position: relative;
+  text-align: center;
+  z-index: 2;
   animation: fadeIn 1.2s ease-out;
 }
+
 .hero-content h1 {
-  font-size:3rem; margin-bottom:1rem;
+  font-size: 3rem;
+  margin-bottom: 1rem;
 }
-.highlight { color: var(--clr-blue); }
+
+.highlight {
+  color: var(--clr-blue);
+}
+
 .hero-content p {
-  font-size:1.25rem; margin-bottom:2rem;
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
   color: var(--clr-blue-lt);
 }
+
+/* Animations */
+@keyframes popIn {
+  to { transform: rotate(0deg) scale(1); }
+}
+
+@keyframes welcomePop {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sticker-welcome {
+    width: 130px;
+    bottom: 4%;
+    left: 3%;
+  }
+}
+
 
 /* ===== BUTTONS ===== */
 .btn, .btn-outline {
