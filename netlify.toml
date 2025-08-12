@@ -1,0 +1,7 @@
+# netlify.toml
+[build]
+  publish   = "."                  # site files live in the repo root
+  functions = "netlify/functions"  # where your serverless functions live
+
+[functions]
+  node_bundler = "esbuild"

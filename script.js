@@ -39,34 +39,26 @@ const navbar = document.querySelector('.navbar');
 let lastY = window.scrollY;
 let ticking = false;
 
-// Tweakables
-const SHOW_AT_TOP = 40;  // always show nav near top
+const SHOW_AT_TOP = 40;  // always show near top
 const DELTA = 6;         // minimal scroll delta to trigger
 
 function handleHideOnScroll() {
   const y = window.scrollY;
 
-  // Always show near top
   if (y <= SHOW_AT_TOP) {
     navbar?.classList.remove('navbar--hidden');
     lastY = y;
     return;
   }
 
-  // Keep visible if mobile menu is open
   const menuOpen = navCollapse?.classList.contains('open');
-
-  // Ignore tiny scrolls to avoid jitter
   if (Math.abs(y - lastY) < DELTA) return;
 
   const scrollingDown = y > lastY;
 
   if (!menuOpen) {
-    if (scrollingDown) {
-      navbar?.classList.add('navbar--hidden');
-    } else {
-      navbar?.classList.remove('navbar--hidden');
-    }
+    if (scrollingDown) navbar?.classList.add('navbar--hidden');
+    else navbar?.classList.remove('navbar--hidden');
   }
 
   lastY = y;
@@ -82,57 +74,64 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Ensure navbar shows after toggling hamburger
 hamburger?.addEventListener('click', () => {
   navbar?.classList.remove('navbar--hidden');
 });
 
-// ---- Strava "Recent Run" ----
+// ===== Strava "Recent Run" =====
+// Force time rendering in Boston/NY regardless of viewer's timezone
+const STRAVA_TIMEZONE = 'America/New_York';
+
 document.addEventListener('DOMContentLoaded', async () => {
-    const card = document.getElementById('strava-card');
-    if (!card) return;
-  
-    try {
-      const res = await fetch('/.netlify/functions/strava');
-      if (!res.ok) throw new Error('Failed to reach function');
-      const data = await res.json();
-      const a = data.latest;
-  
-      if (!a) {
-        card.innerHTML = '<p class="muted">No recent public runs found.</p>';
-        return;
-      }
-  
-      // Helpers
-      const mToMi = m => (m / 1609.344);
-      const secToMinSec = s => {
-        const m = Math.floor(s / 60);
-        const sec = Math.round(s % 60);
-        return `${m}:${sec.toString().padStart(2, '0')}`;
-      };
-  
-      const distanceMi = mToMi(a.distance || 0);
-      const timeSec = a.moving_time || 0;
-      const paceSecPerMi = distanceMi > 0 ? timeSec / distanceMi : 0;
-  
-      const when = new Date(a.start_date_local || a.start_date).toLocaleString([], {
-        month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
-      });
-  
-      card.innerHTML = `
-        <div class="strava-row">
-          <div class="strava-title">${a.name || 'Recent activity'}</div>
-          <div class="strava-badges">
-            <span class="badge--pill">${distanceMi.toFixed(2)} mi</span>
-            <span class="badge--pill">${secToMinSec(timeSec)} moving</span>
-            <span class="badge--pill">${secToMinSec(paceSecPerMi)}/mi</span>
-          </div>
-        </div>
-        <p class="muted">${when} · ${a.type || 'Run'}</p>
-      `;
-    } catch (err) {
-      console.error(err);
-      card.innerHTML = '<p class="muted">Couldn’t load Strava right now.</p>';
+  const card = document.getElementById('strava-card');
+  if (!card) return;
+
+  try {
+    const res = await fetch('/.netlify/functions/strava');
+    if (!res.ok) throw new Error('Failed to reach function');
+    const data = await res.json();
+    const a = data.latest;
+
+    if (!a) {
+      card.innerHTML = '<p class="muted">No recent public runs found.</p>';
+      return;
     }
-  });
-  
+
+    // Helpers
+    const mToMi = m => (m / 1609.344);
+    const secToMinSec = s => {
+      const m = Math.floor(s / 60);
+      const sec = Math.round(s % 60);
+      return `${m}:${sec.toString().padStart(2, '0')}`;
+    };
+
+    const distanceMi = mToMi(a.distance || 0);
+    const timeSec = a.moving_time || 0;
+    const paceSecPerMi = distanceMi > 0 ? timeSec / distanceMi : 0;
+
+    // Use UTC 'start_date' and format in America/New_York
+    const whenUTC = new Date(a.start_date);
+    const whenText = new Intl.DateTimeFormat(undefined, {
+      timeZone: STRAVA_TIMEZONE,
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit'
+    }).format(whenUTC);
+
+    card.innerHTML = `
+      <div class="strava-row">
+        <div class="strava-title">${a.name || 'Recent activity'}</div>
+        <div class="strava-badges">
+          <span class="badge--pill">${distanceMi.toFixed(2)} mi</span>
+          <span class="badge--pill">${secToMinSec(timeSec)} moving</span>
+          <span class="badge--pill">${secToMinSec(paceSecPerMi)}/mi</span>
+        </div>
+      </div>
+      <p class="muted">${whenText} · ${a.type || 'Run'}</p>
+    `;
+  } catch (err) {
+    console.error(err);
+    card.innerHTML = '<p class="muted">Couldn’t load Strava right now.</p>';
+  }
+});
