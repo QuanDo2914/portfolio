@@ -196,19 +196,23 @@ body {
   background: rgba(0, 0, 0, 0.4);
 }
 
+/* =========================
+   HERO STICKERS (desktop first)
+   ========================= */
+
 /* Top-right sticker ("hi") */
 .sticker {
   position: absolute;
-  top: 20%;
-  right: 15%;
-  width: 200px;
+  top: 18%;
+  right: 12%;
+  width: clamp(140px, 16vw, 220px); /* scales with viewport */
   height: auto;
   z-index: 5;
   will-change: transform;
   transition: transform 0.2s ease;
 }
 
-/* Wave from the bottom pivot on hover */
+/* Wave from the bottom pivot on hover (desktop / pointer devices) */
 .sticker:hover {
   transform-origin: 50% 100%; /* pivot at bottom center */
   animation: wave-hand 1s ease-in-out infinite;
@@ -217,19 +221,101 @@ body {
 /* Bottom-left sticker ("welcome") */
 .sticker-welcome {
   position: absolute;
-  bottom: 20%;
-  left: 15%;
-  width: 200px;
+  bottom: 16%;
+  left: 10%;
+  width: clamp(140px, 16vw, 220px); /* scales with viewport */
   height: auto;
   z-index: 5;
-  animation: welcomePop 0.8s ease-out both; /* pop in only */
+  animation: welcomePop 0.8s ease-out both; /* pop in once */
   will-change: transform;
 }
 
-/* Bob on hover only */
+/* Bob on hover only (desktop / pointer devices) */
 .sticker-welcome:hover {
   animation: bob 1.2s ease-in-out infinite; /* faster bob */
 }
+
+/* ===== Animations ===== */
+@keyframes wave-hand {
+  0%   { transform: rotate(0deg); }
+  20%  { transform: rotate(8deg); }
+  40%  { transform: rotate(-6deg); }
+  60%  { transform: rotate(6deg); }
+  80%  { transform: rotate(-3deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes welcomePop {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .sticker:hover,
+  .sticker-welcome,
+  .sticker-welcome:hover {
+    animation: none !important;
+  }
+}
+
+/* =========================
+   RESPONSIVE TUNING
+   ========================= */
+
+/* Medium screens (tablets) */
+@media (max-width: 900px) {
+  .sticker,
+  .sticker-welcome {
+    width: clamp(120px, 20vw, 200px);
+  }
+  .sticker {
+    top: 14%;
+    right: 8%;
+  }
+  .sticker-welcome {
+    bottom: 14%;
+    left: 8%;
+  }
+}
+
+/* Small phones */
+@media (max-width: 600px) {
+  .sticker,
+  .sticker-welcome {
+    width: clamp(110px, 26vw, 180px);
+  }
+  .sticker {
+    top: 10%;
+    right: 5%;
+  }
+  .sticker-welcome {
+    bottom: 10%;
+    left: 5%;
+  }
+}
+
+/* Extra-small phones */
+@media (max-width: 420px) {
+  .sticker,
+  .sticker-welcome {
+    width: clamp(96px, 30vw, 160px);
+  }
+  .sticker {
+    top: 9%;
+    right: 4%;
+  }
+  .sticker-welcome {
+    bottom: 9%;
+    left: 4%;
+  }
+}
+
 
 /* ===== Animations ===== */
 @keyframes wave-hand {
