@@ -482,13 +482,64 @@ body {
 }
 .muted { color: var(--clr-gray-md); }
 
+/* ===== WEATHER ===== */
+.section--weather { background: var(--clr-white); } /* White background */
+.section--weather h2 { 
+  text-align: center; 
+  font-size: 2.2rem; 
+  margin-bottom: 1rem; 
+}
+
+.weather-card {
+  max-width: 680px;
+  margin: 0 auto;
+  background: #fff; /* Card remains white */
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+  padding: 1.25rem 1.5rem;
+}
+
+.weather-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.weather-main {
+  display:flex; 
+  align-items:center; 
+  gap:.75rem;
+  font-size:1.8rem; 
+  font-weight:800;
+  color: var(--clr-gray-dk); /* darker text */
+}
+
+.weather-meta {
+  display:flex; 
+  gap:1rem; 
+  flex-wrap:wrap;
+  color: var(--clr-gray-md);
+  margin-top:.25rem;
+}
+
+.weather-badge {
+  background: var(--clr-blue);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: .9rem;
+}
+
+.muted { color: var(--clr-gray-md); }
 
 /* ===== CONTACT ===== */
-.section--contact { background: var(--clr-white); }
+.section--contact { background: var(--clr-blue-lt); } /* Light blue background */
 .section--contact h2 {
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 1rem;
+  color: var(--clr-gray-dk);
 }
 .section--contact p {
   text-align: center;
@@ -496,14 +547,12 @@ body {
   color: var(--clr-gray-md);
 }
 
-/* Buttons container stays horizontal */
 .contact-buttons {
   display: flex;
   justify-content: center;
   gap: 1rem;
 }
 
-/* Solid button style */
 .contact-buttons .btn {
   background: var(--clr-blue);
   color: var(--clr-white);
@@ -515,7 +564,6 @@ body {
   font-weight: 600;
 }
 
-/* Outline button style */
 .contact-buttons .btn-outline {
   border: 2px solid var(--clr-blue);
   color: var(--clr-blue);
@@ -526,6 +574,7 @@ body {
   text-decoration: none;
   font-weight: 600;
 }
+
 
 /* Hover effects */
 .contact-buttons .btn:hover {
