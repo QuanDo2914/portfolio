@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
+  <!-- =======================
+       META & SEO BASICS
+       ======================= -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Quan Do – Portfolio</title>
 
-  <!-- SEO -->
-  <link rel="canonical" href="https://YOUR_DOMAIN/" />
+  <!-- Search & share preview -->
+  <link rel="canonical" href="https://quanportfolio.netlify.app/" />
   <meta name="description" content="Quan Do – Computer Engineering student. A personal portfolio showcasing my information and projects." />
   <meta name="theme-color" content="#112d4e" />
 
-  <!-- Open Graph (for LinkedIn, Facebook, etc.) -->
+  <!-- Open Graph (LinkedIn, FB, etc.) -->
   <meta property="og:title" content="Quan Do – Portfolio" />
   <meta property="og:description" content="Personal portfolio showcasing my information and projects." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://YOUR_DOMAIN/" />
-  <meta property="og:image" content="https://YOUR_DOMAIN/assets/share-preview.png" />
+  <meta property="og:url" content="https://quanportfolio.netlify.app/" />
+  <!-- Optional: add this image to your repo for rich previews -->
+  <meta property="og:image" content="https://quanportfolio.netlify.app/assets/share-preview.png" />
 
   <!-- Icons -->
   <link rel="icon" href="assets/run-icon.png" />
@@ -25,19 +29,33 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-</head>
 
+  <!-- Leaflet CSS (Strava route map) -->
+  <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""
+/>
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin=""
+></script>
 
 <body>
-
-  <!-- NAVBAR -->
-  <header class="navbar">
+  <!-- =======================
+       NAVBAR
+       ======================= -->
+  <header class="navbar" role="banner">
     <div class="container">
       <a href="#home" class="logo">Quan<span> Do</span></a>
+
       <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
-      <nav class="nav-collapse">
+
+      <nav class="nav-collapse" role="navigation">
         <a href="#home"     class="nav-link">Home</a>
         <a href="#projects" class="nav-link">Projects</a>
         <a href="#about"    class="nav-link">About</a>
@@ -47,11 +65,17 @@
     </div>
   </header>
 
-  <!-- HERO -->
-  <section id="home" class="section section--hero">
-    <div class="overlay"></div>
-    <img src="assets/hi-sticker.png" alt="Sticker" class="sticker" aria-hidden="true">
-    <img src="assets/welcome-sticker.png" alt="Welcome sticker" class="sticker-welcome" aria-hidden="true">
+  <!-- =======================
+       HERO
+       ======================= -->
+  <section id="home" class="section section--hero" aria-label="Intro">
+    <!-- dark overlay to keep text readable atop the gradient/bg image -->
+    <div class="overlay" aria-hidden="true"></div>
+
+    <!-- fun stickers (decorative) -->
+    <img src="assets/hi-sticker.png" alt="" class="sticker" aria-hidden="true">
+    <img src="assets/welcome-sticker.png" alt="" class="sticker-welcome" aria-hidden="true">
+
     <div class="hero-content container">
       <h1>Hello, I’m <span class="highlight">Quan Do</span></h1>
       <p>Computer Engineering Student</p>
@@ -62,22 +86,24 @@
     </div>
   </section>
 
-  <!-- WAVE -->
-  <figure class="wave wave--bottom">
-    <svg viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true">
+  <!-- wave divider to Projects -->
+  <figure class="wave wave--bottom" aria-hidden="true">
+    <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
       <path class="wave__shape" d="M0,0 L1200,0 L1200,100 C900,0 300,200 0,100 Z"/>
     </svg>
   </figure>
 
-  <!-- PROJECTS -->
-  <section id="projects" class="section section--projects">
+  <!-- =======================
+       PROJECTS
+       ======================= -->
+  <section id="projects" class="section section--projects" aria-label="Featured projects">
     <div class="container">
       <h2>Featured Projects</h2>
-      <div class="card-grid">
 
-        <!-- Project: Typing Speed Test -->
-        <div class="card">
-          <img src="assets/project-typingtest.png" alt="Typing Speed Test screenshot">
+      <div class="card-grid">
+        <!-- Typing Speed Test -->
+        <article class="card">
+          <img src="assets/project-typingtest.png" alt="Typing Speed Test app screenshot">
           <div class="card-body">
             <h3>Typing Speed Test</h3>
             <p>A clean, minimal typing app that measures your WPM in real time while you type short prompts.</p>
@@ -86,99 +112,115 @@
               <a href="https://github.com/QuanDo2914/typing-test" class="btn-outline small" target="_blank" rel="noopener">Source</a>
             </div>
           </div>
-        </div>
+        </article>
 
-        <!-- Stock Predictor (hidden for now) -->
-        <!--
-        <div class="card">
+        <!-- (Stock predictor kept out for now)
+        <article class="card">
           <img src="assets/project-stock.png" alt="Stock Predictor screenshot">
           <div class="card-body">
             <h3>Stock Predictor</h3>
-            <p>Predict BUY / SELL signals using a logistic regression model wrapped in a Flask API. Includes live status and confidence.</p>
+            <p>Predict BUY / SELL signals using a logistic regression model wrapped in a Flask API. Includes status & confidence.</p>
             <div class="links">
               <a href="/predictor.html" class="btn small">View App →</a>
               <a href="https://github.com/QuanDo2914/portfolio" class="btn-outline small" target="_blank" rel="noopener">Source</a>
             </div>
           </div>
-        </div>
+        </article>
         -->
-
-        <!-- Add more project cards here -->
-
       </div>
     </div>
   </section>
 
-  <!-- FLIPPED WAVE -->
-  <figure class="wave wave--flip">
-    <svg viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true">
+  <!-- flipped wave to About -->
+  <figure class="wave wave--flip" aria-hidden="true">
+    <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
       <path class="wave__shape" d="M0,0 C300,100 900,-100 1200,0 L1200,100 L0,100 Z"/>
     </svg>
   </figure>
 
-  <!-- ABOUT -->
-  <section id="about" class="section section--about">
+  <!-- =======================
+       ABOUT
+       ======================= -->
+  <section id="about" class="section section--about" aria-label="About Quan">
     <div class="container">
       <h2>About Me</h2>
-      <p>I’m a senior Computer Engineering undergraduate at UMass Amherst with a minor in Mathematics and a GPA of 3.84. While my background is rooted in hardware and embedded software, my passion lies in computer science and artificial intelligence, which I plan to pursue at the graduate level to develop intelligent, scalable solutions that bridge hardware and AI.
+      <p>
+        I’m a senior Computer Engineering undergraduate at UMass Amherst with a minor in Mathematics and a GPA of 3.84.
+        While my background is rooted in hardware and embedded software, my passion lies in computer science and artificial
+        intelligence, which I plan to pursue at the graduate level to develop intelligent, scalable solutions that bridge
+        hardware and AI.
+      </p>
 
-</p>
-      <div class="skills">
+      <div class="skills" aria-label="Core skills">
         <span>Python</span><span>C/C++</span><span>HTML/CSS</span>
         <span>JavaScript</span><span>Embedded Systems</span><span>Linux</span>
       </div>
     </div>
   </section>
 
-  <!-- WAVE -->
-  <figure class="wave wave--bottom">
-    <svg viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true">
+  <!-- wave to Strava -->
+  <figure class="wave wave--bottom" aria-hidden="true">
+    <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
       <path class="wave__shape" d="M0,0 L1200,0 L1200,100 C800,50 400,150 0,100 Z"/>
     </svg>
   </figure>
 
-  <!-- STRAVA – Recent Run -->
-<section id="strava" class="section section--strava">
-  <div class="container">
-    <h2>Recent Run</h2>
-    <div id="strava-card" class="strava-card">
-      <p class="muted">Loading your latest Strava activity…</p>
+  <!-- =======================
+       STRAVA (Recent Activity)
+       ======================= -->
+  <section id="strava" class="section section--strava" aria-label="Recent Strava activity">
+    <div class="container">
+      <h2>Recent Activity</h2>
+
+      <!-- Text summary -->
+      <div id="strava-card" class="strava-card">
+        <p class="muted">Loading your latest Strava activity…</p>
+      </div>
+
+      <!-- Route map (auto-hidden if no GPS; shown if polyline exists) -->
+      <div id="run-map" class="run-map" aria-label="Recent run route map"></div>
     </div>
-  </div>
-</section>
+  </section>
 
-  <!-- WEATHER -->
-<section id="weather" class="section section--weather">
-  <div class="container">
-    <h2>Local Weather</h2>
-    <div class="weather-card" id="weather-card">
-      <p class="muted">Loading weather…</p>
+  <!-- =======================
+       WEATHER
+       ======================= -->
+  <section id="weather" class="section section--weather" aria-label="Local weather">
+    <div class="container">
+      <h2>Local Weather</h2>
+      <div class="weather-card" id="weather-card">
+        <p class="muted">Loading weather…</p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
+  <!-- =======================
+       CONTACT
+       ======================= -->
+  <section id="contact" class="section section--contact" aria-label="Contact">
+    <div class="container">
+      <h2>Get In Touch</h2>
+      <p>Based in Amherst, MA — feel free to drop me a line, connect on LinkedIn, or lace up and run with me.</p>
 
-  <!-- CONTACT -->
-<section id="contact" class="section section--contact">
-  <div class="container">
-    <h2>Get In Touch</h2>
-    <p>Based in Amherst, MA - feel free to drop me a line, connect on LinkedIn, or lace up and run with me.</p>
-    <div class="contact-buttons">
-      <a href="mailto:minhquando2914@gmail.com" class="btn">Email</a>
-      <a href="https://linkedin.com/in/quan-m-do/" class="btn-outline" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://github.com/QuanDo2914" class="btn-outline" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://strava.app.link/OXR7dV8HKVb" 
-         class="btn-outline strava-tooltip" 
-         target="_blank" rel="noopener">
-         Strava
-      </a>
+      <div class="contact-buttons">
+        <a href="mailto:minhquando2914@gmail.com" class="btn">Email</a>
+        <a href="https://linkedin.com/in/quan-m-do/" class="btn-outline" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/QuanDo2914" class="btn-outline" target="_blank" rel="noopener">GitHub</a>
+
+        <!-- small tooltip on hover via CSS -->
+        <a href="https://strava.app.link/OXR7dV8HKVb"
+           class="btn-outline strava-tooltip"
+           target="_blank" rel="noopener">
+          Strava
+        </a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-
-  <!-- FOOTER -->
-  <footer class="footer">
+  <!-- =======================
+       FOOTER
+       ======================= -->
+  <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer-content">
         <div class="footer-links">
@@ -189,12 +231,19 @@
         <p class="copyright">© 2025 Quan Do. All rights reserved.</p>
       </div>
 
-      <!-- Footer sticker -->
-      <img src="assets/take-care.png" alt="Take care sticker" class="sticker-footer" aria-hidden="true">
+      <!-- decorative sticker -->
+      <img src="assets/take-care.png" alt="" class="sticker-footer" aria-hidden="true">
     </div>
   </footer>
 
-  <!-- JS -->
+  <!-- Leaflet JS (Strava map) -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
+  <!-- Site JS (nav, Strava, weather) -->
   <script src="script.js"></script>
 </body>
 </html>

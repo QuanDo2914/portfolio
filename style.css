@@ -1,4 +1,23 @@
-/* ===== VARIABLES ===== */
+/* =========================================================
+   Quan Do — Portfolio styles
+   Structure:
+   1) Variables & Base
+   2) Layout helpers
+   3) Navbar
+   4) Sections & Waves
+   5) Hero + Stickers
+   6) Buttons
+   7) Projects
+   8) About
+   9) Strava (card + map)
+  10) Weather
+  11) Contact + Tooltip
+  12) Footer
+  13) Animations
+  14) Responsive tweaks
+   ========================================================= */
+
+/* 1) VARIABLES & BASE ----------------------------------- */
 :root {
   --clr-navy-dk:  #0a2342;
   --clr-navy:     #112d4e;
@@ -9,742 +28,272 @@
   --ff-sans:      'Inter', sans-serif;
 }
 
-/* ===== RESET & BASE ===== */
 * { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior:smooth; }
 body {
   font-family: var(--ff-sans);
   color: var(--clr-navy-dk);
   background: var(--clr-blue-lt);
 }
 
-/* ===== CONTAINER ===== */
+/* 2) LAYOUT HELPERS ------------------------------------- */
 .container {
-  width: 90%; max-width:1000px;
-  margin: 0 auto; padding:4rem 0;
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 4rem 0;
 }
 
-/* ===== NAVBAR ===== */
+/* 3) NAVBAR --------------------------------------------- */
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  position: fixed; inset: 0 0 auto 0; /* top:0; left:0; right:0 */
   z-index: 100;
-
-  /* Glass-like background */
-  background: rgba(10, 35, 66, 0.7);
+  background: rgba(10,35,66,0.7);
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-
-  /* Smooth hide/show */
-  transition: transform 0.3s ease;
+  transition: transform .3s ease;
   will-change: transform;
 }
+.navbar--hidden { transform: translateY(-100%); }
 
 .navbar .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display:flex; justify-content:space-between; align-items:center;
 }
 
-/* Brand/Logo */
 .logo {
-  font-size: 2.1rem;       /* <- bigger logo text */
-  font-weight: 800;
-  color: var(--clr-white);
-  text-decoration: none;
+  font-size: 2.1rem; font-weight:800;
+  color: var(--clr-white); text-decoration:none;
 }
 .logo span { color: var(--clr-blue); }
 
-/* Links */
-.nav-collapse {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
+.nav-collapse { display:flex; gap:1rem; align-items:center; }
 .nav-link {
-  margin-left: 1.5rem;
-  text-decoration: none;
-  color: var(--clr-blue-lt);
-  position: relative;
-  transition: color .3s;
+  margin-left:1.5rem; text-decoration:none; position:relative;
+  color: var(--clr-blue-lt); transition: color .3s;
 }
 .nav-link:hover,
-.nav-link.active {
-  color: var(--clr-blue);
-}
+.nav-link.active { color: var(--clr-blue); }
 .nav-link.active::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 100%;
-  height: 3px;
-  background: var(--clr-blue);
-  border-radius: 2px;
+  content: ''; position:absolute; left:0; bottom:-4px;
+  width:100%; height:3px; background: var(--clr-blue); border-radius:2px;
 }
 
-/* Mobile menu button */
-.hamburger {
-  display: none;          /* shown via media query if needed */
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  margin-left: 1rem;
-}
-.hamburger .bar {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: var(--clr-blue-lt);
-  margin: 4px 0;
-  border-radius: 2px;
-  transition: all .3s;
-}
-
-/* Mobile-open state */
+/* hamburger shows on small screens (enabled in media query) */
+.hamburger { display:none; background:none; border:none; cursor:pointer; padding:8px; margin-left:1rem; }
+.hamburger .bar { display:block; width:22px; height:2px; background: var(--clr-blue-lt); margin:4px 0; border-radius:2px; transition:all .3s; }
 .nav-collapse.open {
-  display: block;
-  position: absolute;
-  top: 100%;
-  right: 1rem;
-  background: rgba(10,35,66,0.95);
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
-  flex-direction: column;
-}
-.nav-collapse.open .nav-link {
-  margin: 0.5rem 0;
-}
-
-/* Hidden state for auto-hide */
-.navbar--hidden {
-  transform: translateY(-100%);
-}
-
-/* Reduced motion respect */
-@media (prefers-reduced-motion: reduce) {
-  .navbar { transition: none; }
-}
-
-
-/* ===== SECTIONS & WAVES ===== */
-.section { position: relative; overflow: hidden; }
-
-/* Use width:100% (not 100vw) to avoid 1–2px overflow on some browsers,
-   and nudge the wave down 1px so it overlaps the next section cleanly */
-.wave {
-  display: block;
-  width: 100%;
-  margin: 0;
-  line-height: 0;
-  position: relative;
-  top: 1px; /* overlap to hide any anti-alias gap */
-}
-
-/* Remove translateY; it can create a faint seam */
-.wave--bottom { transform: rotate(180deg); }
-.wave--flip   { transform: none; }
-
-/* This color must MATCH the background of the section that follows the wave */
-.wave__shape { 
-  fill: var(--clr-blue-lt); 
-  shape-rendering: crispEdges; /* helps prevent anti-alias hairlines */
-}
-
-
-/* ===== HERO SECTION ===== */
-.section--hero {
-  position: relative; /* needed for absolutely positioned stickers */
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background:
-    linear-gradient(135deg, var(--clr-navy-dk), var(--clr-navy)),
-    url('assets/hero-bg.jpg') center/cover no-repeat;
-  color: var(--clr-white);
-}
-
-/* Overlay */
-.section--hero .overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-}
-
-/* ===== HERO SECTION ===== */
-.section--hero {
-  position: relative; /* needed for absolutely positioned stickers */
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background:
-    linear-gradient(135deg, var(--clr-navy-dk), var(--clr-navy)),
-    url('assets/hero-bg.jpg') center/cover no-repeat;
-  color: var(--clr-white);
-}
-
-/* Overlay */
-.section--hero .overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-}
-
-/* =========================
-   HERO STICKERS (desktop first)
-   ========================= */
-
-/* Top-right sticker ("hi") */
-.sticker {
-  position: absolute;
-  top: 18%;
-  right: 12%;
-  width: clamp(140px, 16vw, 220px); /* scales with viewport */
-  height: auto;
-  z-index: 5;
-  will-change: transform;
-  transition: transform 0.2s ease;
-}
-
-/* Wave from the bottom pivot on hover (desktop / pointer devices) */
-.sticker:hover {
-  transform-origin: 50% 100%; /* pivot at bottom center */
-  animation: wave-hand 1s ease-in-out infinite;
-}
-
-/* Bottom-left sticker ("welcome") */
-.sticker-welcome {
-  position: absolute;
-  bottom: 16%;
-  left: 10%;
-  width: clamp(140px, 16vw, 220px); /* scales with viewport */
-  height: auto;
-  z-index: 5;
-  animation: welcomePop 0.8s ease-out both; /* pop in once */
-  will-change: transform;
-}
-
-/* Bob on hover only (desktop / pointer devices) */
-.sticker-welcome:hover {
-  animation: bob 1.2s ease-in-out infinite; /* faster bob */
-}
-
-/* ===== Animations ===== */
-@keyframes wave-hand {
-  0%   { transform: rotate(0deg); }
-  20%  { transform: rotate(8deg); }
-  40%  { transform: rotate(-6deg); }
-  60%  { transform: rotate(6deg); }
-  80%  { transform: rotate(-3deg); }
-  100% { transform: rotate(0deg); }
-}
-
-@keyframes welcomePop {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes bob {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-10px); }
-}
-
-/* Respect reduced-motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .sticker:hover,
-  .sticker-welcome,
-  .sticker-welcome:hover {
-    animation: none !important;
-  }
-}
-
-/* =========================
-   RESPONSIVE TUNING
-   ========================= */
-
-/* Medium screens (tablets) */
-@media (max-width: 900px) {
-  .sticker,
-  .sticker-welcome {
-    width: clamp(120px, 20vw, 200px);
-  }
-  .sticker {
-    top: 14%;
-    right: 8%;
-  }
-  .sticker-welcome {
-    bottom: 14%;
-    left: 8%;
-  }
-}
-
-/* Small phones */
-@media (max-width: 600px) {
-  .sticker,
-  .sticker-welcome {
-    width: clamp(110px, 26vw, 180px);
-  }
-  .sticker {
-    top: 10%;
-    right: 5%;
-  }
-  .sticker-welcome {
-    bottom: 10%;
-    left: 5%;
-  }
-}
-
-/* Extra-small phones */
-@media (max-width: 420px) {
-  .sticker,
-  .sticker-welcome {
-    width: clamp(96px, 30vw, 160px);
-  }
-  .sticker {
-    top: 9%;
-    right: 4%;
-  }
-  .sticker-welcome {
-    bottom: 9%;
-    left: 4%;
-  }
-}
-
-
-/* ===== Animations ===== */
-@keyframes wave-hand {
-  0%   { transform: rotate(0deg); }
-  20%  { transform: rotate(8deg); }
-  40%  { transform: rotate(-6deg); }
-  60%  { transform: rotate(6deg); }
-  80%  { transform: rotate(-3deg); }
-  100% { transform: rotate(0deg); }
-}
-
-@keyframes welcomePop {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes bob {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-10px); }
-}
-
-/* Respect reduced-motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .sticker:hover,
-  .sticker-welcome:hover {
-    animation: none !important;
-  }
-}
-
-/* Hero text content */
-.hero-content {
-  position: relative;
-  text-align: center;
-  z-index: 2;
-  animation: fadeIn 1.2s ease-out;
-}
-
-.hero-content h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.highlight {
-  color: var(--clr-blue);
-}
-
-.hero-content p {
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
-  color: var(--clr-blue-lt);
-}
-
-/* Animations */
-@keyframes popIn {
-  to { transform: rotate(0deg) scale(1); }
-}
-
-@keyframes welcomePop {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .sticker-welcome {
-    width: 130px;
-    bottom: 4%;
-    left: 3%;
-  }
-}
-
-
-/* ===== BUTTONS ===== */
-.btn, .btn-outline {
-  display:inline-block; text-decoration:none;
-  font-weight:600; border-radius:0.5rem; transition: all .3s;
-}
-.btn {
-  background: var(--clr-blue); color: var(--clr-white);
-  padding:0.75rem 1.5rem;
-}
-.btn:hover {
-  background: var(--clr-white); color: var(--clr-blue);
-  box-shadow:0 4px 12px rgba(0,0,0,0.2);
-}
-.btn-outline {
-  border:2px solid var(--clr-blue); color: var(--clr-blue);
-  padding:0.5rem 1rem;
-}
-.btn-outline:hover {
-  background: var(--clr-blue); color: var(--clr-white);
-}
-.btn.small { padding: 0.5rem 1rem; font-size:0.9rem; }
-.btn-outline.small { padding:0.4rem .9rem; font-size:.85rem; }
-
-/* ===== PROJECTS ===== */
-.section--projects { background: var(--clr-blue-lt); }
-.section--projects h2 {
-  text-align:center; font-size:2.5rem; margin-bottom:2rem;
-}
-.card-grid {
-  display:grid; gap:2rem;
-  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-}
-.card {
-  background: var(--clr-white);
-  border-radius:1rem; overflow:hidden;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-  transition: transform .3s, box-shadow .3s;
-}
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow:0 6px 20px rgba(0,0,0,0.15);
-}
-.card img {
-  width:100%; height:180px; object-fit:cover;
-}
-.card-body { padding:1.5rem; }
-.card-body h3 { font-size:1.5rem; margin-bottom:0.75rem; }
-.card-body p { color: var(--clr-gray-md); margin-bottom:1.25rem; }
-
-/* ===== ABOUT ===== */
-.section--about { background: var(--clr-white); }
-.section--about h2 {
-  text-align:center; font-size:2.5rem; margin-bottom:1rem;
-}
-.section--about p {
-  max-width:700px; margin:0 auto 2rem; line-height:1.8;
-  color: var(--clr-gray-md);
-}
-.skills {
-  display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center;
-}
-.skills span {
-  background: var(--clr-blue); color: var(--clr-white);
-  padding:0.5rem 1rem; border-radius:2rem; font-size:0.9rem;
-  transition: background .3s;
-}
-.skills span:hover { background: var(--clr-navy); }
-
-/* ===== STRAVA ===== */
-.section--strava { background: var(--clr-blue-lt); }
-.section--strava h2 { text-align:center; font-size:2.2rem; margin-bottom:1rem; }
-
-.strava-card {
-  max-width: 680px;
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,.08);
-  padding: 1.25rem 1.5rem;
-}
-.strava-row {
-  display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
-}
-.strava-title { font-weight: 700; font-size: 1.1rem; }
-.strava-badges { display:flex; gap:.5rem; flex-wrap:wrap; }
-.badge--pill {
-  background: var(--clr-blue);
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: .85rem;
-}
-.muted { color: var(--clr-gray-md); }
-
-/* ===== WEATHER ===== */
-.section--weather { background: var(--clr-white); } /* White background */
-.section--weather h2 { 
-  text-align: center; 
-  font-size: 2.2rem; 
-  margin-bottom: 1rem; 
-}
-
-.weather-card {
-  max-width: 680px;
-  margin: 0 auto;
-  background: #fff; /* Card remains white */
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,.08);
-  padding: 1.25rem 1.5rem;
-}
-
-.weather-row {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.weather-main {
-  display:flex; 
-  align-items:center; 
-  gap:.75rem;
-  font-size:1.8rem; 
-  font-weight:800;
-  color: var(--clr-gray-dk); /* darker text */
-}
-
-.weather-meta {
-  display:flex; 
-  gap:1rem; 
-  flex-wrap:wrap;
-  color: var(--clr-gray-md);
-  margin-top:.25rem;
-}
-
-.weather-badge {
-  background: var(--clr-blue);
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: .9rem;
-}
-
-.muted { color: var(--clr-gray-md); }
-
-/* ===== CONTACT ===== */
-.section--contact { background: var(--clr-blue-lt); } /* Light blue background */
-.section--contact h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: var(--clr-gray-dk);
-}
-.section--contact p {
-  text-align: center;
-  margin-bottom: 2rem;
-  color: var(--clr-gray-md);
-}
-
-.contact-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.contact-buttons .btn {
-  background: var(--clr-blue);
-  color: var(--clr-white);
-  padding: 0.75rem 1.5rem;
-  display: flex;
-  align-items: center;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.contact-buttons .btn-outline {
-  border: 2px solid var(--clr-blue);
-  color: var(--clr-blue);
-  padding: 0.75rem 1.5rem;
-  display: flex;
-  align-items: center;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-
-/* Hover effects */
-.contact-buttons .btn:hover {
-  background: var(--clr-navy);
-}
-.contact-buttons .btn-outline:hover {
-  background: var(--clr-blue);
-  color: var(--clr-white);
-}
-
-/* Tooltip container for Strava button */
-.strava-tooltip {
-  position: relative;
-}
-
-/* Tooltip text */
-.strava-tooltip::after {
-  content: "Because I'm a dedicated runner hehe^^";
-  position: absolute;
-  top: 140%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--clr-navy);
-  color: var(--clr-white);
-  padding: 6px 10px;
-  border-radius: 6px;
-  white-space: nowrap;
-  font-size: 0.85rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  z-index: 10;
-}
-
-/* Tooltip arrow */
-.strava-tooltip::before {
-  content: "";
-  position: absolute;
-  bottom: 110%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 6px;
-  border-style: solid;
-  border-color: var(--clr-navy) transparent transparent transparent;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-/* Show tooltip on hover */
-.strava-tooltip:hover::after,
-.strava-tooltip:hover::before {
-  opacity: 1;
-}
-
-
-
-/* ===== PREDICTOR FORM ===== * hidden/ 
-.section--predictor {
-  background: var(--clr-blue-lt);
-  padding-bottom: 6rem;
-}
-.predictor-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: center;
-  margin: 1rem 0 0.5rem;
-}
-#predictor input {
-  flex: 1;
-  min-width: 160px;
-  border:2px solid var(--clr-blue);
-  border-radius: 8px;
-  padding:0.75rem 1rem;
-  background: #f0f6fc;
-  font-size:1rem;
-}
-#predictor button { cursor: pointer; }
-#result {
-  margin-top: 1rem;
-  font-size: 1.35rem;
-  color: var(--clr-navy-dk);
-}
-.badge {
-  background: var(--clr-blue);
-  color: white;
-  padding: 4px 10px;
-  border-radius: 999px;
-  margin-left: 6px;
-  font-weight:600;
-}
-.small-info {
-  font-size:0.85rem;
-  display:block;
-  margin-top:0.5rem;
-  color: var(--clr-gray-md);
-}
-.back { margin-top:2rem; }
-
-/* ===== FOOTER ===== */
-.footer {
-  position: relative;
-  text-align:center; padding:2rem 0;
-  background: var(--clr-navy-dk); color: var(--clr-blue-lt);
-}
-.sticker-footer {
-  position: absolute;
-  bottom: 20px;
-  right: 500px;
-  width: 180px;
-  height: auto;
-  z-index: 10;
-}
-
-/* ===== ANIMATIONS ===== */
-@keyframes fadeIn {
-  from { opacity:0; transform: translateY(20px); }
-  to   { opacity:1; transform: translateY(0); }
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  .navbar .container { flex-direction: column; }
-  .nav-link { margin: 0.5rem 0; }
-  .section--hero { background-position: top; text-align: center; }
-  .hero-content h1 { font-size:2.25rem; }
-  .hero-content p  { font-size:1rem; }
-  .card-grid { grid-template-columns: 1fr; }
-}
-
-/* ===== MOBILE NAV TOGGLE ===== */
-.hamburger {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  margin-left: 1rem;
-}
-.hamburger .bar {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: var(--clr-blue-lt);
-  margin: 4px 0;
-  border-radius: 2px;
-  transition: all .3s;
-}
-.nav-collapse {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-.nav-collapse.open {
-  display: block;
-  position: absolute;
-  top: 100%;
-  right: 1rem;
-  background: rgba(10,35,66,0.95);
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
-  flex-direction: column;
+  display:block; position:absolute; top:100%; right:1rem;
+  background: rgba(10,35,66,0.95); padding:1rem 1.5rem; border-radius:8px;
+  flex-direction:column;
 }
 .nav-collapse.open .nav-link { margin: 0.5rem 0; }
 
-/* ===== ACCESSIBILITY ===== */
-a:focus, button:focus, input:focus {
-  outline: 3px solid var(--clr-blue);
-  outline-offset: 2px;
+/* 4) SECTIONS & WAVES ----------------------------------- */
+.section { position:relative; overflow:hidden; }
+
+.wave {
+  display:block; width:100%; margin:0; line-height:0;
+  position:relative; top:1px; /* overlap to hide anti-alias gap */
+}
+.wave--bottom { transform: rotate(180deg); }
+.wave--flip   { transform: none; }
+.wave__shape  { fill: var(--clr-blue-lt); }
+
+/* 5) HERO + STICKERS ------------------------------------ */
+.section--hero {
+  position:relative;
+  height:100vh;
+  display:flex; align-items:center; justify-content:center;
+  background:
+    linear-gradient(135deg,var(--clr-navy-dk),var(--clr-navy)),
+    url('assets/hero-bg.jpg') center/cover no-repeat;
+  color: var(--clr-white);
+}
+.section--hero .overlay {
+  position:absolute; inset:0; background:rgba(0,0,0,0.4);
 }
 
+/* top-right sticker */
+.sticker {
+  position:absolute; top:18%; right:12%;
+  width: clamp(140px, 16vw, 220px);
+  height:auto; z-index:5; will-change:transform; transition:transform .2s ease;
+}
+/* wave from bottom pivot on hover */
+.sticker:hover { transform-origin:50% 100%; animation: wave-hand 1s ease-in-out infinite; }
 
+/* bottom-left sticker */
+.sticker-welcome {
+  position:absolute; bottom:16%; left:10%;
+  width: clamp(140px, 16vw, 220px);
+  height:auto; z-index:5; will-change:transform;
+  animation: welcomePop .8s ease-out both; /* pop once */
+}
+/* bob only on hover */
+.sticker-welcome:hover { animation: bob 1.2s ease-in-out infinite; }
+
+.hero-content { position:relative; text-align:center; z-index:2; animation: fadeIn 1.2s ease-out; }
+.hero-content h1 { font-size:3rem; margin-bottom:1rem; }
+.hero-content p  { font-size:1.25rem; margin-bottom:2rem; color: var(--clr-blue-lt); }
+.highlight { color: var(--clr-blue); }
+
+/* 6) BUTTONS -------------------------------------------- */
+.btn, .btn-outline {
+  display:inline-block; text-decoration:none; font-weight:600; border-radius:.5rem; transition: all .3s;
+}
+.btn { background: var(--clr-blue); color: var(--clr-white); padding:.75rem 1.5rem; }
+.btn:hover { background: var(--clr-white); color: var(--clr-blue); box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+.btn-outline { border:2px solid var(--clr-blue); color: var(--clr-blue); padding:.5rem 1rem; }
+.btn-outline:hover { background: var(--clr-blue); color: var(--clr-white); }
+.btn.small { padding:.5rem 1rem; font-size:.9rem; }
+.btn-outline.small { padding:.4rem .9rem; font-size:.85rem; }
+
+/* 7) PROJECTS ------------------------------------------- */
+.section--projects { background: var(--clr-blue-lt); }
+.section--projects h2 { text-align:center; font-size:2.5rem; margin-bottom:2rem; }
+
+.card-grid {
+  display:grid; gap:2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+}
+.card {
+  background: var(--clr-white); border-radius:1rem; overflow:hidden;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  transition: transform .3s, box-shadow .3s;
+}
+.card:hover { transform: translateY(-5px); box-shadow:0 6px 20px rgba(0,0,0,0.15); }
+.card img { width:100%; height:180px; object-fit:cover; }
+.card-body { padding:1.5rem; }
+.card-body h3 { font-size:1.5rem; margin-bottom:.75rem; }
+.card-body p  { color: var(--clr-gray-md); margin-bottom:1.25rem; }
+
+/* 8) ABOUT ---------------------------------------------- */
+.section--about { background: var(--clr-white); }
+.section--about h2 { text-align:center; font-size:2.5rem; margin-bottom:1rem; }
+.section--about p  { max-width:700px; margin:0 auto 2rem; line-height:1.8; color: var(--clr-gray-md); }
+.skills {
+  display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center;
+}
+.skills span {
+  background: var(--clr-blue); color: var(--clr-white);
+  padding:.5rem 1rem; border-radius:2rem; font-size:.9rem; transition: background .3s;
+}
+.skills span:hover { background: var(--clr-navy); }
+
+/* 9) STRAVA --------------------------------------------- */
+.section--strava {
+  background: var(--clr-blue-lt);
+  padding-top: 1.5rem;     /* ↓ was inheriting ~4rem */
+  padding-bottom: 3.5rem;  /* keep some room for the map */
+}
+
+.section--strava h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-top: -95px;           /* ensure no extra top gap */
+  margin-bottom: 0.75rem;  /* slightly tighter below the title */
+}
+
+.strava-card {
+  max-width:680px; margin:0 auto;
+  background:#fff; border-radius:14px; box-shadow:0 6px 18px rgba(0,0,0,.08);
+  padding:1.25rem 1.5rem;
+}
+.strava-row { display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
+.strava-title { font-weight:700; font-size:1.1rem; }
+.strava-badges { display:flex; gap:.5rem; flex-wrap:wrap; }
+.badge--pill { background: var(--clr-blue); color:#fff; padding:6px 10px; border-radius:999px; font-size:.85rem; }
+.muted { color: var(--clr-gray-md); }
+
+/* map container (hidden by JS if no GPS polyline) */
+.run-map {
+  height:260px; margin-top:1rem; border-radius:14px; overflow:hidden;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+@media (min-width: 900px) { .run-map { height:320px; } }
+
+/* 10) WEATHER ------------------------------------------- */
+.section--weather { background: var(--clr-white); }
+.section--weather h2 { text-align:center; font-size:2.2rem; margin-bottom:1rem; }
+
+.weather-card {
+  max-width:680px; margin:0 auto;
+  background:#fff; border-radius:14px; box-shadow:0 6px 18px rgba(0,0,0,.08);
+  padding:1.25rem 1.5rem;
+}
+.weather-row { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
+.weather-main { display:flex; align-items:center; gap:.75rem; font-size:1.8rem; font-weight:800; }
+.weather-meta { display:flex; gap:1rem; flex-wrap:wrap; color: var(--clr-gray-md); margin-top:.25rem; }
+.weather-badge { background: var(--clr-blue); color:#fff; padding:6px 10px; border-radius:999px; font-size:.9rem; }
+
+/* 11) CONTACT + TOOLTIP --------------------------------- */
+.section--contact { background: var(--clr-blue-lt); }
+.section--contact h2 { text-align:center; font-size:2.5rem; margin-bottom:1rem; color:#243b53; }
+.section--contact p  { text-align:center; margin-bottom:2rem; color: var(--clr-gray-md); }
+
+.contact-buttons { display:flex; justify-content:center; gap:1rem; }
+.contact-buttons .btn { background: var(--clr-blue); color:#fff; padding:.75rem 1.5rem; display:flex; align-items:center; border-radius:.5rem; text-decoration:none; font-weight:600; }
+.contact-buttons .btn-outline { border:2px solid var(--clr-blue); color: var(--clr-blue); padding:.75rem 1.5rem; display:flex; align-items:center; border-radius:.5rem; text-decoration:none; font-weight:600; }
+.contact-buttons .btn:hover { background: var(--clr-navy); }
+.contact-buttons .btn-outline:hover { background: var(--clr-blue); color:#fff; }
+
+/* small tooltip under Strava link */
+.strava-tooltip { position:relative; }
+.strava-tooltip::after {
+  content: "Because I'm a dedicated runner hehe^^";
+  position:absolute; top:140%; left:50%; transform:translateX(-50%);
+  background: var(--clr-navy); color:#fff; padding:6px 10px; border-radius:6px;
+  white-space:nowrap; font-size:.85rem; opacity:0; pointer-events:none; transition:opacity .3s ease;
+  box-shadow:0 2px 8px rgba(0,0,0,0.2); z-index:10;
+}
+.strava-tooltip:hover::after { opacity:1; }
+
+/* 12) FOOTER -------------------------------------------- */
+.footer {
+  position:relative; text-align:center; padding:2rem 0;
+  background: var(--clr-navy-dk); color: var(--clr-blue-lt);
+}
+.sticker-footer {
+  position:absolute; bottom:20px; right:500px;
+  width:180px; height:auto; z-index:10;
+}
+
+/* 13) ANIMATIONS ---------------------------------------- */
+@keyframes fadeIn { from { opacity:0; transform: translateY(20px);} to { opacity:1; transform: translateY(0);} }
+@keyframes wave-hand {
+  0%{transform:rotate(0deg);} 20%{transform:rotate(8deg);} 40%{transform:rotate(-6deg);}
+  60%{transform:rotate(6deg);} 80%{transform:rotate(-3deg);} 100%{transform:rotate(0deg);}
+}
+@keyframes welcomePop { from { opacity:0; transform: translateY(12px);} to { opacity:1; transform: translateY(0);} }
+@keyframes bob { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-10px);} }
+
+/* 14) RESPONSIVE TWEAKS --------------------------------- */
+@media (max-width: 900px) {
+  .sticker, .sticker-welcome { width: clamp(120px, 20vw, 200px); }
+  .sticker { top:14%; right:8%; }
+  .sticker-welcome { bottom:14%; left:8%; }
+}
+@media (max-width: 768px) {
+  .navbar .container { flex-direction:column; }
+  .nav-link { margin:.5rem 0; }
+  .section--hero { background-position: top; text-align:center; }
+  .hero-content h1 { font-size:2.25rem; }
+  .hero-content p  { font-size:1rem; }
+  .card-grid { grid-template-columns:1fr; }
+}
+@media (max-width: 600px) {
+  .sticker, .sticker-welcome { width: clamp(110px, 26vw, 180px); }
+  .sticker { top:10%; right:5%; }
+  .sticker-welcome { bottom:10%; left:5%; }
+}
+@media (max-width: 420px) {
+  .sticker, .sticker-welcome { width: clamp(96px, 30vw, 160px); }
+  .sticker { top:9%; right:4%; }
+  .sticker-welcome { bottom:9%; left:4%; }
+}
+
+/* Accessibility focus */
+a:focus, button:focus, input:focus {
+  outline:3px solid var(--clr-blue);
+  outline-offset:2px;
+}
