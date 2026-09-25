@@ -1,299 +1,184 @@
-/* =========================================================
-   Quan Do — Portfolio styles
-   Structure:
-   1) Variables & Base
-   2) Layout helpers
-   3) Navbar
-   4) Sections & Waves
-   5) Hero + Stickers
-   6) Buttons
-   7) Projects
-   8) About
-   9) Strava (card + map)
-  10) Weather
-  11) Contact + Tooltip
-  12) Footer
-  13) Animations
-  14) Responsive tweaks
-   ========================================================= */
-
-/* 1) VARIABLES & BASE ----------------------------------- */
 :root {
-  --clr-navy-dk:  #0a2342;
-  --clr-navy:     #112d4e;
-  --clr-blue:     #3f72af;
-  --clr-blue-lt:  #dbe2ef;
-  --clr-white:    #ffffff;
-  --clr-gray-md:  #475569;
-  --ff-sans:      'Inter', sans-serif;
+  --bg: #0a0d14;
+  --bg-soft: #111722;
+  --panel: #151d2b;
+  --panel-2: #1a2434;
+  --text: #f4f7fb;
+  --muted: #9aa8ba;
+  --line: rgba(255,255,255,.1);
+  --accent: #9df56b;
+  --accent-2: #6fc8ff;
+  --max: 1160px;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
-  font-family: var(--ff-sans);
-  color: var(--clr-navy-dk);
-  background: var(--clr-blue-lt);
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
 }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
 
-/* 2) LAYOUT HELPERS ------------------------------------- */
 .container {
-  width: 90%;
-  max-width: 1000px;
+  width: min(calc(100% - 40px), var(--max));
   margin: 0 auto;
-  padding: 4rem 0;
 }
 
-/* 3) NAVBAR --------------------------------------------- */
 .navbar {
-  position: fixed; inset: 0 0 auto 0; /* top:0; left:0; right:0 */
-  z-index: 100;
-  background: rgba(10,35,66,0.7);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-  transition: transform .3s ease;
-  will-change: transform;
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1000;
+  background: rgba(10, 13, 20, .82);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+  transition: transform .25s ease;
 }
 .navbar--hidden { transform: translateY(-100%); }
+.nav-inner { min-height: 70px; display: flex; align-items: center; justify-content: space-between; }
+.logo { text-decoration: none; font-size: 1.25rem; font-weight: 800; letter-spacing: -.04em; }
+.logo span { color: var(--accent); }
+.nav-collapse { display: flex; align-items: center; gap: 26px; }
+.nav-link { text-decoration: none; font-size: .93rem; color: var(--muted); transition: color .2s ease; }
+.nav-link:hover, .nav-link.active { color: var(--text); }
+.nav-resume { color: var(--text); border: 1px solid var(--line); padding: 9px 14px; border-radius: 999px; }
 
-.navbar .container {
-  display:flex; justify-content:space-between; align-items:center;
+.hamburger { display: none; width: 42px; height: 42px; border: 0; background: transparent; padding: 8px; }
+.hamburger span { display: block; width: 100%; height: 2px; margin: 6px 0; background: var(--text); }
+
+.section { padding: 112px 0; scroll-margin-top: 70px; }
+.eyebrow { margin: 0 0 14px; color: var(--accent); font-size: .78rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+h1, h2, h3, p { margin-top: 0; }
+h1, h2, h3 { letter-spacing: -.045em; line-height: 1.05; }
+
+.hero { min-height: 100vh; display: flex; align-items: center; padding-top: 145px; }
+.hero-grid { display: grid; grid-template-columns: 1.45fr .75fr; gap: 72px; align-items: center; }
+.hero h1 { font-size: clamp(3.6rem, 7vw, 6.8rem); max-width: 850px; margin-bottom: 28px; }
+.hero h1 span { color: var(--muted); }
+.hero-lede { color: var(--muted); font-size: clamp(1.05rem, 1.7vw, 1.25rem); max-width: 760px; }
+.hero-actions, .contact-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.hero-links { display: flex; gap: 24px; margin-top: 32px; }
+.hero-links a, .text-link, .project-links a { color: var(--muted); text-decoration: none; border-bottom: 1px solid transparent; }
+.hero-links a:hover, .text-link:hover, .project-links a:hover { color: var(--text); border-bottom-color: currentColor; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; border-radius: 10px; padding: 12px 18px; font-weight: 700; transition: transform .2s ease, border-color .2s ease, background .2s ease; }
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: var(--text); color: var(--bg); }
+.btn-secondary { border: 1px solid var(--line); color: var(--text); background: rgba(255,255,255,.02); }
+
+.hero-panel, .info-card, .activity-shell, .contact-card {
+  background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+  border: 1px solid var(--line);
+  border-radius: 22px;
 }
+.hero-panel { padding: 28px; position: relative; }
+.panel-dot { position: absolute; top: 26px; right: 26px; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 18px var(--accent); }
+.panel-label, .info-kicker { font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
+.panel-value { margin-bottom: 0; }
+.panel-rule { height: 1px; background: var(--line); margin: 20px 0; }
+.hero-panel h2 { font-size: 2rem; margin-bottom: 0; }
 
-.logo {
-  font-size: 2.1rem; font-weight:800;
-  color: var(--clr-white); text-decoration:none;
-}
-.logo span { color: var(--clr-blue); }
+.projects-section { background: #0d121b; }
+.section-heading { max-width: 760px; margin-bottom: 52px; }
+.section-heading h2, .about-section h2, .running-section h2, .contact-section h2 { font-size: clamp(2.4rem, 5vw, 4.4rem); margin-bottom: 18px; }
+.section-heading > p:last-child, .about-copy, .running-section p, .contact-card p { color: var(--muted); }
+.project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.project-card { overflow: hidden; border: 1px solid var(--line); border-radius: 22px; background: var(--panel); }
+.project-card-featured { grid-column: 1 / -1; display: grid; grid-template-columns: 1.15fr .85fr; }
+.project-visual { min-height: 280px; background: var(--panel-2); position: relative; overflow: hidden; }
+.project-card-featured .project-visual { min-height: 410px; }
+.project-body { padding: 28px; }
+.project-body h3 { font-size: 2rem; margin: 10px 0 16px; }
+.project-body p { color: var(--muted); }
+.project-meta { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
+.status-chip { color: var(--accent); }
+.tech-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.tech-list span { font-size: .8rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 6px 9px; }
+.project-links { display: flex; gap: 18px; margin-top: 22px; }
+.image-visual img { width: 100%; height: 100%; object-fit: cover; }
 
-.nav-collapse { display:flex; gap:1rem; align-items:center; }
-.nav-link {
-  margin-left:1.5rem; text-decoration:none; position:relative;
-  color: var(--clr-blue-lt); transition: color .3s;
-}
-.nav-link:hover,
-.nav-link.active { color: var(--clr-blue); }
-.nav-link.active::after {
-  content: ''; position:absolute; left:0; bottom:-4px;
-  width:100%; height:3px; background: var(--clr-blue); border-radius:2px;
-}
+.route-visual { background: radial-gradient(circle at 60% 40%, rgba(111,200,255,.12), transparent 35%), #101826; }
+.route-map-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 32px 32px; }
+.route-visual svg { position: absolute; inset: 12% 7%; width: 86%; height: 76%; }
+.route-visual path { fill: none; stroke: var(--accent); stroke-width: 7; stroke-linecap: round; filter: drop-shadow(0 0 8px rgba(157,245,107,.35)); }
+.route-visual circle { fill: var(--bg); stroke: var(--accent); stroke-width: 5; }
+.route-badge { position: absolute; right: 22px; bottom: 22px; background: rgba(10,13,20,.9); border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; font-weight: 800; }
 
-/* hamburger shows on small screens (enabled in media query) */
-.hamburger { display:none; background:none; border:none; cursor:pointer; padding:8px; margin-left:1rem; }
-.hamburger .bar { display:block; width:22px; height:2px; background: var(--clr-blue-lt); margin:4px 0; border-radius:2px; transition:all .3s; }
-.nav-collapse.open {
-  display:block; position:absolute; top:100%; right:1rem;
-  background: rgba(10,35,66,0.95); padding:1rem 1.5rem; border-radius:8px;
-  flex-direction:column;
-}
-.nav-collapse.open .nav-link { margin: 0.5rem 0; }
+.robot-visual { display: grid; place-items: center; padding: 32px; }
+.robot-grid { display: grid; grid-template-columns: repeat(5, 44px); gap: 7px; }
+.robot-grid span { width: 44px; aspect-ratio: 1; border: 1px solid var(--line); border-radius: 6px; display: grid; place-items: center; }
+.robot-grid .obstacle { background: rgba(111,200,255,.24); border-color: rgba(111,200,255,.55); }
+.robot-grid .car { color: var(--accent); font-size: 1.2rem; border-color: var(--accent); }
 
-/* 4) SECTIONS & WAVES ----------------------------------- */
-.section { position:relative; overflow:hidden; }
+.about-grid, .running-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.about-side { display: grid; gap: 18px; }
+.info-card { padding: 26px; }
+.education-item { display: grid; gap: 4px; padding: 16px 0; border-top: 1px solid var(--line); }
+.education-item:first-of-type { margin-top: 8px; }
+.education-item span { color: var(--muted); font-size: .92rem; }
+.skill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.skill-grid span { border-top: 1px solid var(--line); padding-top: 10px; color: var(--muted); }
 
-.wave {
-  display:block; width:100%; margin:0; line-height:0;
-  position:relative; top:1px; /* overlap to hide anti-alias gap */
-}
-.wave--bottom { transform: rotate(180deg); }
-.wave--flip   { transform: none; }
-.wave__shape  { fill: var(--clr-blue-lt); }
+.running-section { background: #0d121b; }
+.running-grid { align-items: center; }
+.activity-shell { padding: 20px; }
+.activity-head { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 16px; color: var(--muted); font-size: .86rem; }
+.live-dot { color: var(--accent); }
+.strava-row { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+.strava-title { font-size: 1.3rem; font-weight: 800; }
+.strava-badges { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+.badge--pill { border: 1px solid var(--line); border-radius: 999px; padding: 5px 8px; color: var(--muted); font-size: .76rem; }
+.muted { color: var(--muted); }
+.run-map { height: 300px; border-radius: 14px; overflow: hidden; margin-top: 16px; }
+.hidden { display: none; }
 
-/* 5) HERO + STICKERS ------------------------------------ */
-.section--hero {
-  position:relative;
-  height:100vh;
-  display:flex; align-items:center; justify-content:center;
-  background:
-    linear-gradient(135deg,var(--clr-navy-dk),var(--clr-navy)),
-    url('assets/hero-bg.jpg') center/cover no-repeat;
-  color: var(--clr-white);
-}
-.section--hero .overlay {
-  position:absolute; inset:0; background:rgba(0,0,0,0.4);
-}
+.contact-card { padding: 42px; display: flex; justify-content: space-between; gap: 50px; align-items: end; }
+.contact-card > div:first-child { max-width: 700px; }
+.contact-actions { justify-content: flex-end; }
 
-/* top-right sticker */
-.sticker {
-  position:absolute; top:18%; right:12%;
-  width: clamp(140px, 16vw, 220px);
-  height:auto; z-index:5; will-change:transform; transition:transform .2s ease;
-}
-/* wave from bottom pivot on hover */
-.sticker:hover { transform-origin:50% 100%; animation: wave-hand 1s ease-in-out infinite; }
+.footer { border-top: 1px solid var(--line); }
+.footer-inner { min-height: 90px; display: flex; justify-content: space-between; align-items: center; gap: 20px; color: var(--muted); font-size: .88rem; }
+.footer p { margin-bottom: 0; }
 
-/* bottom-left sticker */
-.sticker-welcome {
-  position:absolute; bottom:16%; left:10%;
-  width: clamp(140px, 16vw, 220px);
-  height:auto; z-index:5; will-change:transform;
-  animation: welcomePop .8s ease-out both; /* pop once */
-}
-/* bob only on hover */
-.sticker-welcome:hover { animation: bob 1.2s ease-in-out infinite; }
-
-.hero-content { position:relative; text-align:center; z-index:2; animation: fadeIn 1.2s ease-out; }
-.hero-content h1 { font-size:3rem; margin-bottom:1rem; }
-.hero-content p  { font-size:1.25rem; margin-bottom:2rem; color: var(--clr-blue-lt); }
-.highlight { color: var(--clr-blue); }
-
-/* 6) BUTTONS -------------------------------------------- */
-.btn, .btn-outline {
-  display:inline-block; text-decoration:none; font-weight:600; border-radius:.5rem; transition: all .3s;
-}
-.btn { background: var(--clr-blue); color: var(--clr-white); padding:.75rem 1.5rem; }
-.btn:hover { background: var(--clr-white); color: var(--clr-blue); box-shadow:0 4px 12px rgba(0,0,0,0.2); }
-.btn-outline { border:2px solid var(--clr-blue); color: var(--clr-blue); padding:.5rem 1rem; }
-.btn-outline:hover { background: var(--clr-blue); color: var(--clr-white); }
-.btn.small { padding:.5rem 1rem; font-size:.9rem; }
-.btn-outline.small { padding:.4rem .9rem; font-size:.85rem; }
-
-/* 7) PROJECTS ------------------------------------------- */
-.section--projects { background: var(--clr-blue-lt); }
-.section--projects h2 { text-align:center; font-size:2.5rem; margin-bottom:2rem; }
-
-.card-grid {
-  display:grid; gap:2rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-}
-.card {
-  background: var(--clr-white); border-radius:1rem; overflow:hidden;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-  transition: transform .3s, box-shadow .3s;
-}
-.card:hover { transform: translateY(-5px); box-shadow:0 6px 20px rgba(0,0,0,0.15); }
-.card img { width:100%; height:180px; object-fit:cover; }
-.card-body { padding:1.5rem; }
-.card-body h3 { font-size:1.5rem; margin-bottom:.75rem; }
-.card-body p  { color: var(--clr-gray-md); margin-bottom:1.25rem; }
-
-/* 8) ABOUT ---------------------------------------------- */
-.section--about { background: var(--clr-white); }
-.section--about h2 { text-align:center; font-size:2.5rem; margin-bottom:1rem; }
-.section--about p  { max-width:700px; margin:0 auto 2rem; line-height:1.8; color: var(--clr-gray-md); }
-.skills {
-  display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center;
-}
-.skills span {
-  background: var(--clr-blue); color: var(--clr-white);
-  padding:.5rem 1rem; border-radius:2rem; font-size:.9rem; transition: background .3s;
-}
-.skills span:hover { background: var(--clr-navy); }
-
-/* 9) STRAVA --------------------------------------------- */
-.section--strava {
-  background: var(--clr-blue-lt);
-  padding-top: 1.5rem;     /* ↓ was inheriting ~4rem */
-  padding-bottom: 3.5rem;  /* keep some room for the map */
-}
-
-.section--strava h2 {
-  text-align: center;
-  font-size: 2.2rem;
-  margin-top: -95px;           /* ensure no extra top gap */
-  margin-bottom: 0.75rem;  /* slightly tighter below the title */
-}
-
-.strava-card {
-  max-width:680px; margin:0 auto;
-  background:#fff; border-radius:14px; box-shadow:0 6px 18px rgba(0,0,0,.08);
-  padding:1.25rem 1.5rem;
-}
-.strava-row { display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
-.strava-title { font-weight:700; font-size:1.1rem; }
-.strava-badges { display:flex; gap:.5rem; flex-wrap:wrap; }
-.badge--pill { background: var(--clr-blue); color:#fff; padding:6px 10px; border-radius:999px; font-size:.85rem; }
-.muted { color: var(--clr-gray-md); }
-
-/* map container (hidden by JS if no GPS polyline) */
-.run-map {
-  height:260px; margin-top:1rem; border-radius:14px; overflow:hidden;
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
-}
-@media (min-width: 900px) { .run-map { height:320px; } }
-
-/* 10) WEATHER ------------------------------------------- */
-.section--weather { background: var(--clr-white); }
-.section--weather h2 { text-align:center; font-size:2.2rem; margin-bottom:1rem; }
-
-.weather-card {
-  max-width:680px; margin:0 auto;
-  background:#fff; border-radius:14px; box-shadow:0 6px 18px rgba(0,0,0,.08);
-  padding:1.25rem 1.5rem;
-}
-.weather-row { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
-.weather-main { display:flex; align-items:center; gap:.75rem; font-size:1.8rem; font-weight:800; }
-.weather-meta { display:flex; gap:1rem; flex-wrap:wrap; color: var(--clr-gray-md); margin-top:.25rem; }
-.weather-badge { background: var(--clr-blue); color:#fff; padding:6px 10px; border-radius:999px; font-size:.9rem; }
-
-/* 11) CONTACT + TOOLTIP --------------------------------- */
-.section--contact { background: var(--clr-blue-lt); }
-.section--contact h2 { text-align:center; font-size:2.5rem; margin-bottom:1rem; color:#243b53; }
-.section--contact p  { text-align:center; margin-bottom:2rem; color: var(--clr-gray-md); }
-
-.contact-buttons { display:flex; justify-content:center; gap:1rem; }
-.contact-buttons .btn { background: var(--clr-blue); color:#fff; padding:.75rem 1.5rem; display:flex; align-items:center; border-radius:.5rem; text-decoration:none; font-weight:600; }
-.contact-buttons .btn-outline { border:2px solid var(--clr-blue); color: var(--clr-blue); padding:.75rem 1.5rem; display:flex; align-items:center; border-radius:.5rem; text-decoration:none; font-weight:600; }
-.contact-buttons .btn:hover { background: var(--clr-navy); }
-.contact-buttons .btn-outline:hover { background: var(--clr-blue); color:#fff; }
-
-/* small tooltip under Strava link */
-.strava-tooltip { position:relative; }
-.strava-tooltip::after {
-  content: "Because I'm a dedicated runner hehe^^";
-  position:absolute; top:140%; left:50%; transform:translateX(-50%);
-  background: var(--clr-navy); color:#fff; padding:6px 10px; border-radius:6px;
-  white-space:nowrap; font-size:.85rem; opacity:0; pointer-events:none; transition:opacity .3s ease;
-  box-shadow:0 2px 8px rgba(0,0,0,0.2); z-index:10;
-}
-.strava-tooltip:hover::after { opacity:1; }
-
-/* 12) FOOTER -------------------------------------------- */
-.footer {
-  position:relative; text-align:center; padding:2rem 0;
-  background: var(--clr-navy-dk); color: var(--clr-blue-lt);
-}
-.sticker-footer {
-  position:absolute; bottom:20px; right:500px;
-  width:180px; height:auto; z-index:10;
-}
-
-/* 13) ANIMATIONS ---------------------------------------- */
-@keyframes fadeIn { from { opacity:0; transform: translateY(20px);} to { opacity:1; transform: translateY(0);} }
-@keyframes wave-hand {
-  0%{transform:rotate(0deg);} 20%{transform:rotate(8deg);} 40%{transform:rotate(-6deg);}
-  60%{transform:rotate(6deg);} 80%{transform:rotate(-3deg);} 100%{transform:rotate(0deg);}
-}
-@keyframes welcomePop { from { opacity:0; transform: translateY(12px);} to { opacity:1; transform: translateY(0);} }
-@keyframes bob { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-10px);} }
-
-/* 14) RESPONSIVE TWEAKS --------------------------------- */
 @media (max-width: 900px) {
-  .sticker, .sticker-welcome { width: clamp(120px, 20vw, 200px); }
-  .sticker { top:14%; right:8%; }
-  .sticker-welcome { bottom:14%; left:8%; }
-}
-@media (max-width: 768px) {
-  .navbar .container { flex-direction:column; }
-  .nav-link { margin:.5rem 0; }
-  .section--hero { background-position: top; text-align:center; }
-  .hero-content h1 { font-size:2.25rem; }
-  .hero-content p  { font-size:1rem; }
-  .card-grid { grid-template-columns:1fr; }
-}
-@media (max-width: 600px) {
-  .sticker, .sticker-welcome { width: clamp(110px, 26vw, 180px); }
-  .sticker { top:10%; right:5%; }
-  .sticker-welcome { bottom:10%; left:5%; }
-}
-@media (max-width: 420px) {
-  .sticker, .sticker-welcome { width: clamp(96px, 30vw, 160px); }
-  .sticker { top:9%; right:4%; }
-  .sticker-welcome { bottom:9%; left:4%; }
+  .hero-grid, .about-grid, .running-grid, .project-card-featured { grid-template-columns: 1fr; }
+  .hero { min-height: auto; padding-top: 150px; }
+  .hero-panel { max-width: 620px; }
+  .project-card-featured .project-visual { min-height: 320px; }
+  .contact-card { flex-direction: column; align-items: flex-start; }
+  .contact-actions { justify-content: flex-start; }
 }
 
-/* Accessibility focus */
-a:focus, button:focus, input:focus {
-  outline:3px solid var(--clr-blue);
-  outline-offset:2px;
+@media (max-width: 720px) {
+  .container { width: min(calc(100% - 28px), var(--max)); }
+  .section { padding: 82px 0; }
+  .hamburger { display: block; }
+  .nav-collapse {
+    position: absolute;
+    top: 70px;
+    left: 14px;
+    right: 14px;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: #101620;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 10px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  }
+  .nav-collapse.open { display: flex; }
+  .nav-link { padding: 12px; }
+  .nav-resume { border: 0; }
+  .hero h1 { font-size: clamp(3rem, 15vw, 5rem); }
+  .project-grid { grid-template-columns: 1fr; }
+  .project-card-featured { grid-column: auto; }
+  .strava-row { flex-direction: column; }
+  .strava-badges { justify-content: flex-start; }
+  .skill-grid { grid-template-columns: 1fr; }
+  .footer-inner { min-height: 120px; flex-direction: column; justify-content: center; align-items: flex-start; }
 }
