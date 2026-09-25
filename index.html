@@ -1,249 +1,251 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-  <!-- =======================
-       META & SEO BASICS
-       ======================= -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Quan Do – Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quan Do — Software Engineer</title>
 
-  <!-- Search & share preview -->
   <link rel="canonical" href="https://quanportfolio.netlify.app/" />
-  <meta name="description" content="Quan Do – Computer Engineering student. A personal portfolio showcasing my information and projects." />
-  <meta name="theme-color" content="#112d4e" />
+  <meta
+    name="description"
+    content="Quan Do is a software engineer and UIUC MCS student with a Computer Engineering background, building projects across systems, machine learning, and embedded software."
+  />
+  <meta name="theme-color" content="#0a0d14" />
 
-  <!-- Open Graph (LinkedIn, FB, etc.) -->
-  <meta property="og:title" content="Quan Do – Portfolio" />
-  <meta property="og:description" content="Personal portfolio showcasing my information and projects." />
+  <meta property="og:title" content="Quan Do — Software Engineer" />
+  <meta property="og:description" content="Systems, machine learning, embedded software, and projects built for real-world use." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://quanportfolio.netlify.app/" />
-  <!-- Optional: add this image to your repo for rich previews -->
   <meta property="og:image" content="https://quanportfolio.netlify.app/assets/share-preview.png" />
 
-  <!-- Icons -->
   <link rel="icon" href="assets/run-icon.png" />
   <link rel="apple-touch-icon" href="assets/run-icon.png" />
-
-  <!-- Fonts & CSS -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Leaflet CSS (Strava route map) -->
-  <link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-  crossorigin=""
-/>
-<script
-  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-  crossorigin=""
-></script>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
 <body>
-  <!-- =======================
-       NAVBAR
-       ======================= -->
   <header class="navbar" role="banner">
-    <div class="container">
-      <a href="#home" class="logo">Quan<span> Do</span></a>
+    <div class="container nav-inner">
+      <a href="#home" class="logo" aria-label="Quan Do home">QD<span>.</span></a>
 
-      <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
-        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
 
-      <nav class="nav-collapse" role="navigation">
-        <a href="#home"     class="nav-link">Home</a>
+      <nav class="nav-collapse" aria-label="Primary navigation">
         <a href="#projects" class="nav-link">Projects</a>
-        <a href="#about"    class="nav-link">About</a>
-        <a href="#contact"  class="nav-link">Contact</a>
-        <a href="assets/QuanDo_resume.pdf" class="nav-link resume" target="_blank" rel="noopener">Resume</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#running" class="nav-link">Running</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <a href="assets/QuanDo_resume.pdf" class="nav-link nav-resume" target="_blank" rel="noopener">Resume ↗</a>
       </nav>
     </div>
   </header>
 
-  <!-- =======================
-       HERO
-       ======================= -->
-  <section id="home" class="section section--hero" aria-label="Intro">
-    <!-- dark overlay to keep text readable atop the gradient/bg image -->
-    <div class="overlay" aria-hidden="true"></div>
+  <main>
+    <section id="home" class="section hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Software Engineer · Systems · ML · Embedded</p>
+          <h1>I build software for <span>real-world problems.</span></h1>
+          <p class="hero-lede">
+            I’m Quan Do, an MCS student at the University of Illinois Urbana-Champaign with a Computer Engineering background from UMass Amherst. I enjoy building across algorithms, software systems, machine learning, and hardware.
+          </p>
 
-    <!-- fun stickers (decorative) -->
-    <img src="assets/hi-sticker.png" alt="" class="sticker" aria-hidden="true">
-    <img src="assets/welcome-sticker.png" alt="" class="sticker-welcome" aria-hidden="true">
-
-    <div class="hero-content container">
-      <h1>Hello, I’m <span class="highlight">Quan Do</span></h1>
-      <p>Computer Engineering Student</p>
-      <div class="hero-cta">
-        <a href="#projects" class="btn">My Work ↓</a>
-        <!-- <a href="/predictor.html" class="btn-outline">Stock Predictor</a> -->
-      </div>
-    </div>
-  </section>
-
-  <!-- wave divider to Projects -->
-  <figure class="wave wave--bottom" aria-hidden="true">
-    <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
-      <path class="wave__shape" d="M0,0 L1200,0 L1200,100 C900,0 300,200 0,100 Z"/>
-    </svg>
-  </figure>
-
-  <!-- =======================
-       PROJECTS
-       ======================= -->
-  <section id="projects" class="section section--projects" aria-label="Featured projects">
-    <div class="container">
-      <h2>Featured Projects</h2>
-
-      <div class="card-grid">
-        <!-- Typing Speed Test -->
-        <article class="card">
-          <img src="assets/project-typingtest.png" alt="Typing Speed Test app screenshot">
-          <div class="card-body">
-            <h3>Typing Speed Test</h3>
-            <p>A clean, minimal typing app that measures your WPM in real time while you type short prompts.</p>
-            <div class="links">
-              <a href="https://quantypingtest.netlify.app" class="btn small" target="_blank" rel="noopener">View App →</a>
-              <a href="https://github.com/QuanDo2914/typing-test" class="btn-outline small" target="_blank" rel="noopener">Source</a>
-            </div>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">View projects</a>
+            <a href="assets/QuanDo_resume.pdf" class="btn btn-secondary" target="_blank" rel="noopener">Resume ↗</a>
           </div>
-        </article>
 
-        <!-- (Stock predictor kept out for now)
-        <article class="card">
-          <img src="assets/project-stock.png" alt="Stock Predictor screenshot">
-          <div class="card-body">
-            <h3>Stock Predictor</h3>
-            <p>Predict BUY / SELL signals using a logistic regression model wrapped in a Flask API. Includes status & confidence.</p>
-            <div class="links">
-              <a href="/predictor.html" class="btn small">View App →</a>
-              <a href="https://github.com/QuanDo2914/portfolio" class="btn-outline small" target="_blank" rel="noopener">Source</a>
-            </div>
+          <div class="hero-links" aria-label="Social links">
+            <a href="https://github.com/QuanDo2914" target="_blank" rel="noopener">GitHub ↗</a>
+            <a href="https://linkedin.com/in/quan-m-do/" target="_blank" rel="noopener">LinkedIn ↗</a>
           </div>
-        </article>
-        -->
-      </div>
-    </div>
-  </section>
-
-  <!-- flipped wave to About -->
-  <figure class="wave wave--flip" aria-hidden="true">
-    <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
-      <path class="wave__shape" d="M0,0 C300,100 900,-100 1200,0 L1200,100 L0,100 Z"/>
-    </svg>
-  </figure>
-
-  <!-- =======================
-       ABOUT
-       ======================= -->
-  <section id="about" class="section section--about" aria-label="About Quan">
-    <div class="container">
-      <h2>About Me</h2>
-      <p>
-        I’m a senior Computer Engineering undergraduate at UMass Amherst with a minor in Mathematics and a GPA of 3.84.
-        While my background is rooted in hardware and embedded software, my passion lies in computer science and artificial
-        intelligence, which I plan to pursue at the graduate level to develop intelligent, scalable solutions that bridge
-        hardware and AI.
-      </p>
-
-      <div class="skills" aria-label="Core skills">
-        <span>Python</span><span>C/C++</span><span>HTML/CSS</span>
-        <span>JavaScript</span><span>Embedded Systems</span><span>Linux</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- wave to Strava -->
-  <figure class="wave wave--bottom" aria-hidden="true">
-    <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
-      <path class="wave__shape" d="M0,0 L1200,0 L1200,100 C800,50 400,150 0,100 Z"/>
-    </svg>
-  </figure>
-
-  <!-- =======================
-       STRAVA (Recent Activity)
-       ======================= -->
-  <section id="strava" class="section section--strava" aria-label="Recent Strava activity">
-    <div class="container">
-      <h2>Recent Activity</h2>
-
-      <!-- Text summary -->
-      <div id="strava-card" class="strava-card">
-        <p class="muted">Loading your latest Strava activity…</p>
-      </div>
-
-      <!-- Route map (auto-hidden if no GPS; shown if polyline exists) -->
-      <div id="run-map" class="run-map" aria-label="Recent run route map"></div>
-    </div>
-  </section>
-
-  <!-- =======================
-       WEATHER
-       ======================= -->
-  <section id="weather" class="section section--weather" aria-label="Local weather">
-    <div class="container">
-      <h2>Local Weather</h2>
-      <div class="weather-card" id="weather-card">
-        <p class="muted">Loading weather…</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- =======================
-       CONTACT
-       ======================= -->
-  <section id="contact" class="section section--contact" aria-label="Contact">
-    <div class="container">
-      <h2>Get In Touch</h2>
-      <p>Based in Amherst, MA — feel free to drop me a line, connect on LinkedIn, or lace up and run with me.</p>
-
-      <div class="contact-buttons">
-        <a href="mailto:minhquando2914@gmail.com" class="btn">Email</a>
-        <a href="https://linkedin.com/in/quan-m-do/" class="btn-outline" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://github.com/QuanDo2914" class="btn-outline" target="_blank" rel="noopener">GitHub</a>
-
-        <!-- small tooltip on hover via CSS -->
-        <a href="https://strava.app.link/OXR7dV8HKVb"
-           class="btn-outline strava-tooltip"
-           target="_blank" rel="noopener">
-          Strava
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- =======================
-       FOOTER
-       ======================= -->
-  <footer class="footer" role="contentinfo">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-links">
-          <a href="assets/QuanDo_resume.pdf" target="_blank" rel="noopener">Resume</a>
-          <a href="https://github.com/QuanDo2914" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://linkedin.com/in/quan-m-do/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
-        <p class="copyright">© 2025 Quan Do. All rights reserved.</p>
-      </div>
 
-      <!-- decorative sticker -->
-      <img src="assets/take-care.png" alt="" class="sticker-footer" aria-hidden="true">
+        <aside class="hero-panel" aria-label="Current focus">
+          <div class="panel-dot"></div>
+          <p class="panel-label">Currently</p>
+          <h2>MCS @ UIUC</h2>
+          <div class="panel-rule"></div>
+          <p class="panel-label">Building</p>
+          <p class="panel-value">RunRoute — smarter running route generation</p>
+          <div class="panel-rule"></div>
+          <p class="panel-label">Based in</p>
+          <p class="panel-value">Champaign, Illinois</p>
+          <div class="panel-rule"></div>
+          <p class="panel-label">Interested in</p>
+          <p class="panel-value">Software engineering, ML, systems & embedded roles</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="projects" class="section projects-section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Selected work</p>
+          <h2>Projects I care about.</h2>
+          <p>I like projects where the engineering constraints are part of the product, not something hidden behind the demo.</p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card project-card-featured">
+            <div class="project-visual route-visual" aria-hidden="true">
+              <div class="route-map-grid"></div>
+              <svg viewBox="0 0 600 320" role="presentation">
+                <path d="M74 237 C112 152, 171 108, 247 143 S355 257, 425 192 S487 94, 535 120" />
+                <circle cx="74" cy="237" r="9" />
+                <circle cx="535" cy="120" r="9" />
+              </svg>
+              <span class="route-badge">5.02 km</span>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="status-chip">In active development</span>
+                <span>Featured</span>
+              </div>
+              <h3>RunRoute</h3>
+              <p>
+                A running route planner for Urbana-Champaign that generates distance-matched routes from local pedestrian data. The routing engine uses graph search, route-quality constraints, terrain estimates, and explainable ranking instead of fabricated AI recommendations.
+              </p>
+              <div class="tech-list">
+                <span>TypeScript</span><span>React</span><span>Graph Search</span><span>OpenStreetMap</span><span>Leaflet</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-visual robot-visual" aria-hidden="true">
+              <div class="robot-grid">
+                <span></span><span></span><span class="obstacle"></span><span></span><span></span>
+                <span></span><span class="obstacle"></span><span></span><span></span><span></span>
+                <span></span><span></span><span class="car">▲</span><span></span><span class="obstacle"></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span class="obstacle"></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta"><span>Embedded systems</span></div>
+              <h3>PiCar-X Mapping</h3>
+              <p>
+                A Raspberry Pi robotics project that converts sensor distance and angle readings into obstacle coordinates on a 2D occupancy grid, forming the foundation for local environment mapping and navigation.
+              </p>
+              <div class="tech-list">
+                <span>Python</span><span>Raspberry Pi</span><span>Sensors</span><span>Robotics</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-visual image-visual">
+              <img src="assets/project-typingtest.png" alt="Typing Speed Test application interface" loading="lazy" />
+            </div>
+            <div class="project-body">
+              <div class="project-meta"><span>Web app</span></div>
+              <h3>Typing Speed Test</h3>
+              <p>A lightweight typing application that measures words per minute in real time with a clean, distraction-free interface.</p>
+              <div class="tech-list">
+                <span>JavaScript</span><span>HTML</span><span>CSS</span>
+              </div>
+              <div class="project-links">
+                <a href="https://quantypingtest.netlify.app" target="_blank" rel="noopener">Live demo ↗</a>
+                <a href="https://github.com/QuanDo2914/typing-test" target="_blank" rel="noopener">Source ↗</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section about-section">
+      <div class="container about-grid">
+        <div>
+          <p class="eyebrow">About</p>
+          <h2>Computer engineering roots, software focus.</h2>
+          <p class="about-copy">
+            My background spans low-level systems and software development, which is why I’m most interested in problems that require both implementation and engineering judgment. I like understanding what happens below the abstraction layer, then using that knowledge to build simpler and more reliable products.
+          </p>
+          <p class="about-copy">
+            I’m currently expanding that foundation through graduate coursework in computer science while continuing to build projects in routing, machine learning, distributed systems, and embedded computing.
+          </p>
+        </div>
+
+        <div class="about-side">
+          <div class="info-card">
+            <p class="info-kicker">Education</p>
+            <div class="education-item">
+              <strong>University of Illinois Urbana-Champaign</strong>
+              <span>Master of Computer Science</span>
+            </div>
+            <div class="education-item">
+              <strong>University of Massachusetts Amherst</strong>
+              <span>B.S. Computer Engineering · Minor in Mathematics</span>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <p class="info-kicker">Toolkit</p>
+            <div class="skill-grid">
+              <span>Python</span><span>C / C++</span><span>TypeScript</span><span>JavaScript</span>
+              <span>React</span><span>Linux</span><span>Git</span><span>SQL</span>
+              <span>Embedded Systems</span><span>Machine Learning</span><span>Networking</span><span>Algorithms</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="running" class="section running-section">
+      <div class="container running-grid">
+        <div>
+          <p class="eyebrow">Outside engineering</p>
+          <h2>I run a lot.</h2>
+          <p>
+            Distance running is how I practice consistency away from a screen. I train year-round, race everything from 5Ks to marathons, and recently completed the Sydney Marathon. The same habit I value in training shows up in my work: show up, measure what happened, and improve the next iteration.
+          </p>
+          <a href="https://strava.app.link/OXR7dV8HKVb" class="text-link" target="_blank" rel="noopener">Follow on Strava ↗</a>
+        </div>
+
+        <div class="activity-shell">
+          <div class="activity-head">
+            <span>Latest Strava activity</span>
+            <span class="live-dot">Live</span>
+          </div>
+          <div id="strava-card" class="strava-card">
+            <p class="muted">Loading latest activity…</p>
+          </div>
+          <div id="run-map" class="run-map" aria-label="Latest outdoor activity route"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+      <div class="container contact-card">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Let’s build something useful.</h2>
+          <p>I’m always happy to talk about software, embedded systems, ML, running, or an interesting engineering problem.</p>
+        </div>
+        <div class="contact-actions">
+          <a href="mailto:minhquando2914@gmail.com" class="btn btn-primary">Email me</a>
+          <a href="https://linkedin.com/in/quan-m-do/" class="btn btn-secondary" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://github.com/QuanDo2914" class="btn btn-secondary" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="year">2026</span> Quan Do.</p>
+      <p>Built with plain HTML, CSS & JavaScript.</p>
     </div>
   </footer>
 
-  <!-- Leaflet JS (Strava map) -->
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""
-  ></script>
-
-  <!-- Site JS (nav, Strava, weather) -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
