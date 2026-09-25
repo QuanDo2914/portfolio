@@ -1,4 +1,4 @@
-# Quan Do — Portfolio
+# Quan Do Portfolio
 
 Personal portfolio for Quan Do, focused on software engineering, systems, machine learning, embedded computing, and running.
 
@@ -8,9 +8,11 @@ https://quanportfolio.netlify.app/
 
 ## Featured work
 
-- **RunRoute** — running route generation using graph search, OpenStreetMap data, route-quality constraints, terrain estimates, and explainable ranking.
-- **PiCar-X Mapping** — Raspberry Pi robotics work that maps sensor distance/angle readings into a 2D occupancy grid.
-- **Typing Speed Test** — lightweight web application for measuring typing speed in real time.
+- **RunRoute**: running route generation using graph search, OpenStreetMap data, route-quality constraints, terrain estimates, and explainable ranking.
+  - Live app: https://runroute-uc.netlify.app/
+  - Source: https://github.com/QuanDo2914/RunRoute
+- **PiCar-X Mapping**: Raspberry Pi robotics work that maps sensor distance/angle readings into a 2D occupancy grid.
+- **Typing Speed Test**: lightweight web application for measuring typing speed in real time.
 
 ## Stack
 
