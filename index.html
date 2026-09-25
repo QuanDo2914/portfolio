@@ -88,19 +88,13 @@
         <div class="section-heading">
           <p class="eyebrow">Selected work</p>
           <h2>Projects I care about.</h2>
-          <p>I like projects where the engineering constraints are part of the product, not something hidden behind the demo.</p>
+          <p>I like building projects around real problems I encounter in everyday life, with the goal of creating practical tools that I would genuinely find useful myself.</p>
         </div>
 
         <div class="project-grid">
           <article class="project-card project-card-featured">
-            <div class="project-visual route-visual" aria-hidden="true">
-              <div class="route-map-grid"></div>
-              <svg viewBox="0 0 600 320" role="presentation">
-                <path d="M74 237 C112 152, 171 108, 247 143 S355 257, 425 192 S487 94, 535 120" />
-                <circle cx="74" cy="237" r="9" />
-                <circle cx="535" cy="120" r="9" />
-              </svg>
-              <span class="route-badge">5.02 km</span>
+            <div class="project-visual image-visual">
+              <img src="assets/runroute-app.webp" alt="RunRoute application showing generated running routes on an Urbana-Champaign map" loading="lazy" />
             </div>
             <div class="project-body">
               <div class="project-meta">
@@ -109,7 +103,7 @@
               </div>
               <h3>RunRoute</h3>
               <p>
-                A running route planner for Urbana-Champaign that generates distance-matched routes from local pedestrian data. The routing engine uses graph search, route-quality constraints, terrain estimates, and explainable ranking instead of fabricated AI recommendations.
+                I built RunRoute to solve a problem I often had myself: finding a good route for a specific distance without planning every turn. It generates and ranks routes around Urbana-Champaign based on distance, terrain, traffic lights, and pedestrian map data.
               </p>
               <div class="tech-list">
                 <span>TypeScript</span><span>React</span><span>Graph Search</span><span>OpenStreetMap</span><span>Leaflet</span>
