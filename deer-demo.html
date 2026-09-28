@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animal Detector Demo Videos | Quan Do</title>
+  <meta name="description" content="Demo videos for the Animal Detector on Road senior design project." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0d14;
+      --panel: #151d2b;
+      --text: #f4f7fb;
+      --muted: #9aa8ba;
+      --line: rgba(255,255,255,.1);
+      --accent: #9df56b;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(10,13,20,.9);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      font-size: 1.25rem;
+    }
+
+    .back {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .back:hover { color: var(--text); }
+
+    main { padding: 84px 0 110px; }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      line-height: 1;
+      letter-spacing: -.05em;
+    }
+
+    .lede {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.7;
+      margin: 24px 0 48px;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .video-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    video {
+      width: 100%;
+      display: block;
+      background: #000;
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+    }
+
+    .video-info { padding: 18px 20px 20px; }
+    .video-info h2 { margin: 0; font-size: 1rem; }
+    .video-info p { margin: 6px 0 0; color: var(--muted); font-size: .9rem; }
+
+    @media (max-width: 760px) {
+      .container { width: min(calc(100% - 28px), var(--max)); }
+      main { padding-top: 58px; }
+      .video-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="index.html">QD.</a>
+      <a class="back" href="index.html#projects">← Back to portfolio</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <p class="eyebrow">Senior Design · Computer Vision</p>
+      <h1>Animal Detector on Road</h1>
+      <p class="lede">
+        Demo footage from the senior design prototype, including the computer vision, alerting, and braking system running on the RC car platform.
+      </p>
+
+      <div class="video-grid">
+        <article class="video-card">
+          <video controls playsinline preload="metadata">
+            <source src="assets/deer-videos/demo1.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-info">
+            <h2>Demo 1</h2>
+            <p>Animal detection system test.</p>
+          </div>
+        </article>
+
+        <article class="video-card">
+          <video controls playsinline preload="metadata">
+            <source src="assets/deer-videos/demo2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-info">
+            <h2>Demo 2</h2>
+            <p>Prototype testing footage.</p>
+          </div>
+        </article>
+
+        <article class="video-card">
+          <video controls playsinline preload="metadata">
+            <source src="assets/deer-videos/demo3.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-info">
+            <h2>Demo 3</h2>
+            <p>Animal detection and vehicle response test.</p>
+          </div>
+        </article>
+
+        <article class="video-card">
+          <video controls playsinline preload="metadata">
+            <source src="assets/deer-videos/demo4.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-info">
+            <h2>Demo 4</h2>
+            <p>Integrated system demo.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
