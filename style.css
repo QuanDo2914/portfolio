@@ -143,6 +143,77 @@ h1, h2, h3 { letter-spacing: -.045em; line-height: 1.05; }
 .footer-inner { min-height: 90px; display: flex; justify-content: space-between; align-items: center; gap: 20px; color: var(--muted); font-size: .88rem; }
 .footer p { margin-bottom: 0; }
 
+
+/* Pantry daily puzzle project preview */
+.pantry-visual {
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: radial-gradient(circle at 20% 20%, rgba(111,200,255,.2), transparent 46%), #101b2c;
+}
+.pantry-preview {
+  width: min(100%, 570px);
+  padding: 19px;
+  border-radius: 18px;
+  background: #f8fafc;
+  color: #172033;
+  box-shadow: 0 25px 65px rgba(0,0,0,.33);
+  transform: rotate(-1deg);
+  font-family: Inter, system-ui, sans-serif;
+}
+.pantry-preview-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.pantry-brand { display: flex; align-items: center; gap: 7px; font-size: 22px; font-weight: 800; letter-spacing: -.05em; }
+.pantry-leaf { width: 17px; height: 23px; display: inline-block; background: #42a876; border-radius: 5% 90% 10% 90%; transform: rotate(22deg); }
+.pantry-day { font-size: 9px; color: #64748b; font-weight: 800; letter-spacing: .09em; }
+.pantry-switch { display: flex; width: max-content; gap: 4px; margin: 10px auto; padding: 3px; background: #e9eef7; border-radius: 8px; color: #64748b; font-size: 10px; font-weight: 700; }
+.pantry-switch span { padding: 4px 18px; border-radius: 6px; }
+.pantry-switch .active { color: #fff; background: #5278eb; }
+.pantry-preview-panel { border: 1px solid #e2e8f0; background: #fff; border-radius: 14px; padding: 13px; }
+.pantry-panel-heading { display: grid; gap: 3px; }
+.pantry-panel-heading span { color: #5278eb; letter-spacing: .12em; font-size: 9px; font-weight: 800; }
+.pantry-panel-heading strong { font-size: 15px; letter-spacing: -.035em; }
+.pantry-food-grid { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 8px; margin-top: 11px; }
+.pantry-food { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-width: 0; padding: 9px 3px; border-radius: 10px; background: #f1f5f9; }
+.pantry-food.complete { background: #eaf7f0; }
+.pantry-food b { max-width: 100%; overflow: hidden; text-overflow: ellipsis; font-size: 9px; white-space: nowrap; }
+.pantry-food small { color: #64748b; font-size: 9px; font-weight: 700; }
+.pantry-food.complete small { color: #25845b; }
+.pantry-food-icon { display: block; position: relative; height: 25px; width: 25px; }
+.pantry-tomato { background: #e66560; border-radius: 48%; }
+.pantry-tomato:before { content: ""; position: absolute; background: #368f61; width: 12px; height: 8px; left: 8px; top: -3px; border-radius: 0 90% 0 90%; transform: rotate(-24deg); }
+.pantry-egg { background: #fff; border: 1px solid #e1dccd; border-radius: 52% 52% 47% 47%; transform: rotate(-16deg); }
+.pantry-egg:before { content: ""; position: absolute; inset: 8px; background: #ffc857; border-radius: 50%; }
+.pantry-lettuce { background: #69b67a; border-radius: 6% 88% 8% 85%; transform: rotate(-25deg); }
+.pantry-rice { background: radial-gradient(circle at 50% 46%, #fff 0 52%, #d9e3ef 56% 100%); border: 2px solid #dce4ee; border-radius: 50%; }
+.pantry-pepper { background: #f7bf56; border-radius: 44% 51% 46% 50%; transform: rotate(10deg); }
+.pantry-pepper:before { content: ""; position: absolute; left: 10px; top: -4px; width: 4px; height: 9px; border-radius: 4px; background: #37895f; }
+.pantry-recipes-label { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 12px 1px 9px; }
+.pantry-recipes-label strong { font-size: 12px; }
+.pantry-recipes-label span { color: #5278eb; background: #eff4ff; padding: 4px 8px; border-radius: 99px; font-size: 9px; font-weight: 800; }
+.pantry-recipe-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 9px; }
+.pantry-recipe { min-width: 0; padding: 8px; text-align: center; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; }
+.pantry-recipe.picked { border: 2px solid #5278eb; background: #eff4ff; padding: 7px; }
+.pantry-dish { display: grid; place-items: center; height: 53px; border-radius: 8px; margin-bottom: 5px; background: #f0f9ec; }
+.pantry-dish:before { content: ""; width: 34px; height: 34px; border: 5px solid #fff; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #a9d86c 0 19%, #4caa78 20% 50%, #f1bc5e 52% 65%, #71c38d 67%); box-shadow: 0 2px 6px rgba(0,0,0,.12); }
+.pantry-dish.rice { background: #fff8e8; }
+.pantry-dish.rice:before { background: radial-gradient(circle at 45% 55%, #fff4bd 0 30%, #efa85a 32% 45%, #faf6da 47%); }
+.pantry-dish.soup { background: #fff2e9; }
+.pantry-dish.soup:before { background: radial-gradient(circle at 35% 35%, #e87951 0 38%, #f3ac71 41% 69%, #db704c 71%); }
+.pantry-recipe b { display: block; font-size: 10px; line-height: 1.3; }
+.pantry-recipe small { display: block; font-size: 8px; color: #64748b; margin-top: 3px; }
+.pantry-recipe.picked small { color: #4166d6; font-weight: 800; }
+@media (max-width: 720px) {
+  .pantry-visual { padding: 14px; }
+  .pantry-preview { padding: 14px; }
+  .pantry-food-grid { gap: 5px; }
+  .pantry-food { padding: 8px 2px; }
+  .pantry-food b { font-size: 8px; }
+  .pantry-recipe-grid { gap: 6px; }
+  .pantry-recipe { padding: 7px 4px; }
+  .pantry-recipe.picked { padding: 6px 3px; }
+  .pantry-recipe b { font-size: 9px; }
+}
+
 @media (max-width: 900px) {
   .hero-grid, .about-grid, .running-grid, .project-card-featured { grid-template-columns: 1fr; }
   .hero { min-height: auto; padding-top: 150px; }
